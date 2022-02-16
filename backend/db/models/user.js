@@ -39,13 +39,34 @@ module.exports = (sequelize, DataTypes) => {
     };
     static associate(models) {
       // define association here
+      User.hasMany(models.Project, { foreignKey: 'owner_id' });
+      User.hasMany(models.Task, { foreignKey: 'creator_id' });
+      User.hasMany(models.Task, { foreignKey: 'edit_by_id' });
+      User.hasMany(models.Task, { foreignKey: 'assign_to_id' });
+
+      const memberMapping = {
+        through: 'Member',
+        otherKey: 'project_id',
+        foreignKey: 'user_id'
+      }
+      User.belongsToMany(models.Project, memberMapping);
+
+      const inviteMapping = {
+        through: 'Invite',
+        otherKey: 'project_id',
+        foreignKey: 'recipient_id'
+      }
+      User.belongsToMany(models.Project, inviteMapping);
+
+      User.hasMany(models.Notification, {foreignKey: 'recipient_id'});
     }
   };
   User.init(
     {
       username: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(30),
         allowNull: false,
+        unique: true,
         validate: {
           len: [4, 30],
           isNotEmail(value) {
@@ -55,12 +76,32 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
-      email: {
-        type: DataTypes.STRING,
+      name: {
+        type: DataTypes.STRING(100),
         allowNull: false,
         validate: {
-          len: [3, 256],
+          len: [2, 100],
         },
+      },
+      email: {
+        type: DataTypes.STRING(320),
+        allowNull: false,
+        unique: true,
+        validate: {
+          len: [3, 320],
+        },
+      },
+      title: {
+        type: DataTypes.STRING(100),
+        validate: {
+          len: [1, 100],
+        },
+      },
+      avatar_url: {
+        type: DataTypes.STRING(600),
+        validate: {
+          len: [6, 600]
+        }
       },
       hashedPassword: {
         type: DataTypes.STRING.BINARY,

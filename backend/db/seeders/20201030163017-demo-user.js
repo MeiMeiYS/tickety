@@ -6,27 +6,34 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('Users', [
       {
-        email: 'demo@user.io',
-        username: 'Demo-lition',
+        username: 'Demo-user',
+        name: 'Demo User',
+        email: 'demo@aa.io',
+        title: 'Demo project manager',
+        avatar_url: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=761&q=80',
         hashedPassword: bcrypt.hashSync('password'),
       },
       {
-        email: faker.internet.email(),
         username: 'FakeUser1',
-        hashedPassword: bcrypt.hashSync(faker.internet.password()),
+        name: 'Fake User1',
+        email: faker.internet.email(),
+        title: null,
+        avatar_url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8ZmFjZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60',
+        hashedPassword: bcrypt.hashSync('password'),
       },
       {
-        email: faker.internet.email(),
         username: 'FakeUser2',
-        hashedPassword: bcrypt.hashSync(faker.internet.password()),
+        name: 'Fake User2',
+        email: faker.internet.email(),
+        title: null,
+        avatar_url: 'https://images.unsplash.com/photo-1554151228-14d9def656e4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=686&q=80',
+        hashedPassword: bcrypt.hashSync('password'),
       },
     ], {});
   },
 
   down: async (queryInterface, Sequelize) => {
     const Op = Sequelize.Op;
-    return queryInterface.bulkDelete('Users', {
-      username: { [Op.in]: ['Demo-lition', 'FakeUser1', 'FakeUser2'] }
-    }, {});
+    return queryInterface.bulkDelete('Users', null, {});
   }
 };
