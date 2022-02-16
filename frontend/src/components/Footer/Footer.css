@@ -1,0 +1,50 @@
+footer {
+    width: 100%;
+    height: 150px;
+    background-color: var(--background-secondary);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0 50px 0;
+}
+
+.footer-links {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.footer-links button {
+    background-color: transparent;
+    border: 1px solid whitesmoke;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.footer-links button:hover{
+    border: 1px solid var(--text-primary);
+    background-color: var(--text-primary-opacity);
+}
+
+.footer-links button:hover i{
+    color: var(--text-primary);
+}
+
+.footer-links button i {
+    color: whitesmoke;
+    font-size: 25px;
+}
+
+footer p {
+    font-size: 1rem;
+    color: black;
+    opacity: 0.6;
+}

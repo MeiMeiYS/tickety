@@ -7,7 +7,7 @@
     min-height: calc(100vh - 60px);
     padding: 0 20px;
     background-color: var(--background-primary);
-    background: linear-gradient(180deg, rgba(215,209,240,1) 0%, rgba(245,245,245,1) 50%, rgba(170,211,237,1) 100%);
+    background: linear-gradient(180deg, var(--background-primary) 0%, #f5f5f5 60%, var(--background-secondary)100%);
 }
 
 /*-----------banner----------------------------------------------------------------*/
@@ -17,7 +17,7 @@
     flex-direction: row;
     align-items: center;
     max-width: 1300px;
-    margin-top: 60px;
+    margin-top: 150px;
     /* background-color: cornsilk; */
 }
 
@@ -75,9 +75,8 @@
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
-    height: calc(90vh - 60px);
     max-width: 1300px;
-    margin-top: 60px;
+    margin: 150px 0;
     /* background-color: cornsilk; */
 }
 
@@ -132,6 +131,7 @@
     .splash-page-content .banner {
         display: flex;
         flex-direction: column;
+        margin-top: 60px;
     }
 
     .splash-page-content .banner-text {
@@ -150,6 +150,7 @@
     .splash-page-content .section-one {
         display: flex;
         flex-direction: column;
+        margin-top: 60px;
     }
 
     .splash-page-content .section-one-text {
