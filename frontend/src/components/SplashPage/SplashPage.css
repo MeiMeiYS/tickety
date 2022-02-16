@@ -1,0 +1,194 @@
+.splash-page-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: calc(100vh - 60px);
+    padding: 0 20px;
+    background-color: var(--background-primary);
+    background: linear-gradient(180deg, rgba(215,209,240,1) 0%, rgba(245,245,245,1) 50%, rgba(170,211,237,1) 100%);
+}
+
+/*-----------banner----------------------------------------------------------------*/
+
+.splash-page-content .banner {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    max-width: 1300px;
+    margin-top: 60px;
+    /* background-color: cornsilk; */
+}
+
+.splash-page-content .banner-text {
+    width: 45%;
+    padding: 0 10px 0 110px;
+}
+
+.splash-page-content .banner-text h1 {
+    margin-bottom: 15px;
+    font-size: 2.5rem;
+}
+
+.splash-page-content .banner-text h1 span {
+    color: var(--text-primary);
+    text-decoration: underline;
+}
+
+.splash-page-content .banner-text p {
+    font-size: 1.2rem;
+    line-height: 1.8rem;
+    margin-bottom: 15px;
+}
+
+.splash-page-content .banner-sign-up-btn {
+    display: inline-block;
+    font-size: 1.2rem;
+    font-weight: 600;
+    line-height: 2rem;
+    color: var(--text-primary);
+    border: 2px solid var(--text-primary);
+    border-radius: 22px;
+    padding: 5px 25px;
+    margin-left: 10px;
+    transition: all 0.3s;
+}
+
+.splash-page-content .banner-sign-up-btn:hover {
+    background-color: var(--text-primary);
+    color: whitesmoke;
+}
+
+.splash-page-content .banner-img {
+    width: 55%;
+}
+
+.splash-page-content .banner-img img {
+    width: 100%;
+    height: 100%;
+}
+
+/*-----------section one----------------------------------------------------------------*/
+
+.splash-page-content .section-one {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    height: calc(90vh - 60px);
+    max-width: 1300px;
+    margin-top: 60px;
+    /* background-color: cornsilk; */
+}
+
+.splash-page-content .section-one-text {
+    width: 45%;
+    padding: 0 10px 0 70px;
+}
+
+.splash-page-content .section-one-text h2 {
+    margin-bottom: 15px;
+    font-size: 2rem;
+}
+
+.splash-page-content .section-one-text h2 span {
+    color: var(--text-primary);
+    text-decoration: underline;
+}
+
+.splash-page-content .section-one-text p {
+    font-size: 1.2rem;
+    line-height: 1.8rem;
+    margin-bottom: 15px;
+}
+
+.splash-page-content .section-one-img {
+    width: 55%;
+}
+
+.splash-page-content .section-one-img img {
+    width: 100%;
+    height: 100%;
+}
+
+/* ------------------media query------------------ */
+
+/* Extra extra large */
+@media (max-width: 1400px) {
+
+}
+
+/* Extra large */
+@media (max-width: 1200px) {
+
+}
+
+
+/* Large */
+@media (max-width: 992px) {
+
+    /*-----------banner----------------------------------------------------------------*/
+
+    .splash-page-content .banner {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .splash-page-content .banner-text {
+        width: 80%;
+        padding: 20px;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .splash-page-content .banner-img {
+        width: 80%;
+    }
+
+    /*-----------section one----------------------------------------------------------------*/
+
+    .splash-page-content .section-one {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .splash-page-content .section-one-text {
+        width: 80%;
+        padding: 20px;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .splash-page-content .section-one-img {
+        width: 80%;
+    }
+
+}
+
+/* Medium */
+@media (max-width: 768px) {
+
+
+}
+
+/* small */
+@media (max-width: 576px) {
+
+    /*-----------banner----------------------------------------------------------------*/
+
+    .splash-page-content .banner-text {
+        width: 100%;
+        padding: 20px 0;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+     /*-----------section one----------------------------------------------------------------*/
+
+    .splash-page-content .section-one-text {
+        width: 100%;
+        padding: 20px 0;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+}

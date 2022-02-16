@@ -1,1 +1,28 @@
-/* TODO Add site wide styles */
+:root {
+    --text-primary: #6250fe;
+    --text-primary-opacity: rgba(98, 80, 254, 0.1);
+    /* --text-secondary: #000000; */
+    /* --text-success: #000000; */
+    /* --text-danger: #000000; */
+    --background-primary: #d7d1f0;
+    /* --background-secondary: #000000; */
+    /* --background-inputbox: #000000; */
+  }
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Fira Sans', sans-serif;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+}
+
+#root {
+  width: 100vw;
+  /* height: 100vh; */
+  /* background-color: var(--background-primary); */
+  /* background: rgb(215,209,240);
+  background: linear-gradient(180deg, rgba(215,209,240,1) 0%, rgba(245,245,245,1) 50%, rgba(170,211,237,1) 100%); */
+  font-size: 16px;
+}
