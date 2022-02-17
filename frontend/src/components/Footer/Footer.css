@@ -45,6 +45,5 @@ footer {
 
 footer p {
     font-size: 1rem;
-    color: black;
-    opacity: 0.6;
+    color: var(--text-grey);
 }

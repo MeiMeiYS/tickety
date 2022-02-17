@@ -21,6 +21,10 @@ const validateSignup = [
     .not()
     .isEmail()
     .withMessage('Username cannot be an email.'),
+  check('name')
+    .exists({ checkFalsy: true })
+    .isLength({ min: 2 })
+    .withMessage('Please provide your name with at least 2 characters.'),
   check('password')
     .exists({ checkFalsy: true })
     .isLength({ min: 6 })
@@ -29,12 +33,18 @@ const validateSignup = [
 ];
 
 // Sign up
-router.post(
-  '',
-  validateSignup,
-  asyncHandler(async (req, res) => {
-    const { email, password, username } = req.body;
-    const user = await User.signup({ email, username, password });
+router.post('', asyncHandler(async (req, res) => {
+    const { email, username, name, password } = req.body;
+    const errors = [];
+    // check if email or username exits in database already
+    const checkUserEmail = await User.findOne({ where: {email} });
+    if (checkUserEmail) errors.push('This email address has already been used.')
+    const checkUsername = await User.findOne({ where: {username} });
+    if (checkUsername) errors.push('This username has already been taken.')
+    if (errors.length) return res.status(400).json({ errors })
+
+    // create user
+    const user = await User.signup({ email, username, name, password });
 
     await setTokenCookie(res, user);
 
