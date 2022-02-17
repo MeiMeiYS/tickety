@@ -8,7 +8,7 @@ const SplashPage = () => {
         <div className='banner'>
             <div className='banner-text'>
                 <h1>Tickety made project managment <span>easy</span></h1>
-                <p>With tickety, you can manage your work flow by stage, keep track of your tasks, and assign tasks to your teammates.</p>
+                <p>With tickety, you can manage your work flow by stages, keep track of your tasks, and assign tasks to your teammates.</p>
                 <NavLink className='banner-sign-up-btn' to="/signup">Sign Up for free</NavLink>
             </div>
             <div className='banner-img'>
