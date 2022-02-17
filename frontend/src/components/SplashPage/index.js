@@ -12,7 +12,7 @@ const SplashPage = () => {
                 <NavLink className='banner-sign-up-btn' to="/signup">Sign Up for free</NavLink>
             </div>
             <div className='banner-img'>
-                <img src={banner_img}></img>
+                <img src={banner_img} alt='Kanban board illustration'></img>
             </div>
         </div>
         <div className='section-one'>
@@ -21,7 +21,7 @@ const SplashPage = () => {
                 <p>Organize your tasks all in one place. Customize task cards for easy analysis and improve productivity.</p>
             </div>
             <div className='section-one-img'>
-                <img src={splash_img1}></img>
+                <img src={splash_img1} alt='Team work illustration'></img>
             </div>
         </div>
     </div>
