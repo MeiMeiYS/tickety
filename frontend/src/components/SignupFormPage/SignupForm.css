@@ -27,6 +27,7 @@
 
 .sign-up-page-content .sign-up-form-box h1,
 .login-page-content .login-form-box h1 {
+    font-size: 2rem;
     margin-bottom: 20px;
 }
 

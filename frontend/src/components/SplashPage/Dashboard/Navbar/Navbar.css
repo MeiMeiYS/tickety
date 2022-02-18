@@ -1,0 +1,57 @@
+.dashboard-navbar .nav-btn-group,
+.dashboard-navbar .nav-projects-button-group {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    /* background-color: tomato; */
+}
+
+.dashboard-navbar a,
+.dashboard-navbar button {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 40px;
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: black;
+    margin: 5px 0;
+    transition: all 0.3s;
+
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.dashboard-navbar a:hover,
+.dashboard-navbar button:hover {
+    background-color: #9991ba;
+}
+
+.dashboard-navbar a i,
+.dashboard-navbar button i {
+    margin: 0 10px;
+    font-size: 1.5rem;
+    /* color: rgb(255, 255, 255); */
+}
+
+.dashboard-navbar .nav-btn-group {
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--text-grey);
+}
+
+.dashboard-navbar .nav-projects-button-group > span {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 40px;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: black;
+    opacity: 0.5;
+    margin: 5px 0 5px 10px ;
+}

@@ -6,7 +6,6 @@ import LoginFormPage from "./components/LoginFormPage";
 import * as sessionActions from './store/session';
 import Navigation from './components/Navigation';
 import SplashPage from './components/SplashPage';
-import Footer from './components/Footer';
 // import { Modal } from './context/Modal';
 function App() {
   const dispatch = useDispatch();
@@ -31,8 +30,10 @@ function App() {
             <LoginFormPage />
           </Route> */}
           <Route exact path='/'>
+            <SplashPage display='dashboard'/>
+          </Route>
+          <Route exact path='/:username/:projectName'>
             <SplashPage />
-            <Footer />
           </Route>
           <Route exact path='/login'>
             <LoginFormPage />

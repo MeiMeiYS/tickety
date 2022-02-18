@@ -1,0 +1,68 @@
+.new-project-form-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: whitesmoke;
+    border-radius: 12px;
+    width: 60%;
+    max-width: 600px;
+    min-width: 450px;
+    padding: 30px 50px;
+}
+
+.new-project-form-box h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.new-project-form-box form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.new-project-form-box .input-container-name input,
+.new-project-form-box .input-container-description textarea,
+.new-project-form-box button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 35px;
+    width: 100%;
+    border: 1px solid var(--border-input-box);
+    border-radius: 22px;
+    margin: 10px 0;
+    padding: 0 22px;
+    transition: all 0.3s;
+    background-color: transparent;
+    outline: none;
+}
+
+.new-project-form-box .input-container-description textarea {
+    height: 100px;
+    resize: none;
+    padding: 10px 22px;
+}
+
+.new-project-form-box label {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.new-project-form-box button {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    border: 2px solid var(--text-primary);
+}
+
+.new-project-form-box button:hover {
+    background-color: var(--text-primary-opacity);
+}
+
+.new-project-form-box button:active {
+    background-color: var(--text-primary-opacity);
+    transform: translateY(2px);
+}

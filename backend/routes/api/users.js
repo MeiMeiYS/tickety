@@ -16,7 +16,9 @@ const validateSignup = [
   check('username')
     .exists({ checkFalsy: true })
     .isLength({ min: 4 })
-    .withMessage('Please provide a username with at least 4 characters.'),
+    .withMessage('Please provide a username with at least 4 characters.')
+    .isLength({ max: 30 })
+    .withMessage('Username is too long.'),
   check('username')
     .not()
     .isEmail()
@@ -33,7 +35,7 @@ const validateSignup = [
 ];
 
 // Sign up
-router.post('', asyncHandler(async (req, res) => {
+router.post('', validateSignup, asyncHandler(async (req, res) => {
     const { email, username, name, password } = req.body;
     const errors = [];
     // check if email or username exits in database already
