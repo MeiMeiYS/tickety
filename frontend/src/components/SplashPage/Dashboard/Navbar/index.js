@@ -16,7 +16,7 @@ const Navbar = () => {
                     <i className="fa-solid fa-gauge-high"></i>
                     <span>Dashboard</span>
                 </NavLink>
-                <NavLink exact to="/accounts/setting">
+                <NavLink exact to="/account-setting">
                     <i className="fa-solid fa-gear"></i>
                     <span>Settings</span>
                 </NavLink>

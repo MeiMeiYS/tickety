@@ -18,10 +18,12 @@
     height: calc(100vh - 60px);
     background-color: #a8a1c3;
     padding: 10px;
+    overflow: scroll;
 }
 
 .dashboard-content .dashboard-main {
     width: 100%;
     height: calc(100vh - 60px);
     background-color: #b4b4c6;
+    overflow: scroll;
 }

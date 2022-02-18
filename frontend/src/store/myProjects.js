@@ -41,7 +41,10 @@ export const createProject = (owner_id, name, description) => async (dispatch) =
     }),
   });
     const project = await response.json();
-    dispatch(addProject(project));
+    if (response.ok){
+      dispatch(addProject(project));
+      return project
+    }
     return response;
 };
 

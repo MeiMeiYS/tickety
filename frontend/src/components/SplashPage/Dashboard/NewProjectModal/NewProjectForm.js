@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import './NewProjectForm.css';
 import { createProject } from '../../../../store/myProjects';
 
 const NewProjectForm = ({ setShowModal }) => {
     const dispatch = useDispatch();
+    const history = useHistory();
     const sessionUser = useSelector((state) => state.session.user);
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
@@ -13,7 +15,10 @@ const NewProjectForm = ({ setShowModal }) => {
     const handleSubmit = e => {
         e.preventDefault();
         dispatch(createProject(sessionUser.id, name, description))
-            .then(() => setShowModal(false))
+            .then((res) => {
+                setShowModal(false);
+                history.push(`/${sessionUser.username}/${res.name}`);
+            })
             .catch(async (res) => {
                 const data = await res.json();
                 if (data && data.errors) setErrors(data.errors);

@@ -49,7 +49,7 @@ function ProfileButton({ user }) {
               <p className="title">{user.title}</p>
             </div>
           </div>
-          <NavLink exact to="/accounts/setting">Settings</NavLink>
+          <NavLink exact to="/account-setting">Settings</NavLink>
           <button type="button" onClick={logout}>Log Out</button>
         </div>
       )}
