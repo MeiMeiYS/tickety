@@ -5,8 +5,8 @@ import NewProjectModal from '../NewProjectModal';
 
 const Navbar = () => {
     const sessionUser = useSelector((state) => state.session.user);
-    const projects = useSelector((state) => state.projects);
-    const projectsArray = Object.entries(projects);
+    const myProjects = useSelector((state) => state.myProjects);
+    const myProjectsArray = Object.entries(myProjects);
 
 
     return (
@@ -24,13 +24,13 @@ const Navbar = () => {
             </div>
             <div className='nav-projects-button-group'>
                 <span>My Projects</span>
-                { projectsArray.length ? projectsArray.map(subArr => {
+                { myProjectsArray.length ? myProjectsArray.map(subArr => {
                     return (
                     <NavLink key={`project-${subArr[1].id}`} exact to={`/${sessionUser.username}/${subArr[1].name}`}>
                         <i className="fa-solid fa-circle" style={{ fontSize: '0.5rem'}}></i>
                         <span>{subArr[1].name}</span>
                     </NavLink>)
-                }) : <span>You have no project yet.</span>}
+                }) : <span className="no-project-message">You have no project yet.</span>}
             </div>
         </div>
     )

@@ -16,6 +16,14 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Column.init({
+    project_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'Projects',
+        key: 'id'
+      },
+    },
     kanban_id: {
       type: DataTypes.INTEGER,
       allowNull: false,

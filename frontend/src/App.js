@@ -30,7 +30,7 @@ function App() {
             <LoginFormPage />
           </Route> */}
           <Route exact path='/'>
-            <SplashPage display='dashboard'/>
+            <SplashPage />
           </Route>
           <Route exact path='/:username/:projectName'>
             <SplashPage />

@@ -1,14 +1,17 @@
 import { useSelector } from 'react-redux';
 import SplashPageContent from './SplashPageContent';
-import DashBoard from './Dashboard'
+import { useParams } from 'react-router-dom';
+import DashBoard from './Dashboard';
 import Footer from '../Footer';
 
-const SplashPage = ({ display }) => {
+const SplashPage = () => {
+    const params = useParams();
     const sessionUser = useSelector(state => state.session.user);
+
     return (
         <>
             { sessionUser ?
-            <DashBoard display={display} /> :
+            <DashBoard params={params} /> :
             <>
                 <SplashPageContent />
                 <Footer />

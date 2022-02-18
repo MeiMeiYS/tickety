@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import './NewProjectForm.css';
-import { createProject } from '../../../../store/projects';
+import { createProject } from '../../../../store/myProjects';
 
 const NewProjectForm = ({ setShowModal }) => {
     const dispatch = useDispatch();

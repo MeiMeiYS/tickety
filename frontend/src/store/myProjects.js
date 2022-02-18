@@ -1,8 +1,8 @@
 import { csrfFetch } from "./csrf.js";
 
-const LOAD_PROJECTS = "projects/loadProjects";
-const ADD_PROJECT = "projects/addProject";
-// const REMOVE_PROJECT = "projects/removeProject";
+const LOAD_PROJECTS = "myProjects/loadProjects";
+const ADD_PROJECT = "myProjects/addProject";
+const REMOVE_PROJECT = "myProjects/removeProject";
 
 const loadProjects = (projects) => ({
     type: LOAD_PROJECTS,
@@ -14,15 +14,15 @@ const addProject = (project) => ({
     payload: project,
 });
 
-// const removeProject = (id) => ({
-//     type: REMOVE_PROJECT,
-//     payload: id,
-// });
+const removeProject = (projectId) => ({
+    type: REMOVE_PROJECT,
+    payload: projectId,
+});
 
 //---------thunk actions------------------------------------------------
 
-export const fetchAllProjects = () => async (dispatch) => {
-  const response = await csrfFetch("/api/projects");
+export const fetchAllMyProjects = () => async (dispatch) => {
+  const response = await csrfFetch("/api/projects/mine");
 
   if (response.ok) {
     const data = await response.json();
@@ -43,7 +43,14 @@ export const createProject = (owner_id, name, description) => async (dispatch) =
     const project = await response.json();
     dispatch(addProject(project));
     return response;
+};
 
+export const deleteProject = (projectId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/projects/${projectId}`, {
+    method: "DELETE"
+  });
+    if (response.ok)  dispatch(removeProject(projectId));
+    return response;
 };
 
 //---------reducer------------------------------------------------
@@ -60,9 +67,9 @@ function reducer(state = initialState, action) {
     case ADD_PROJECT:
       newState[action.payload.id] = action.payload;
       return newState;
-    // case REMOVE_PROJECT:
-    //   newState = Object.assign({}, state, { user: null });
-    //   return newState;
+    case REMOVE_PROJECT:
+      delete newState[action.payload];
+      return newState;
     default:
       return state;
   }

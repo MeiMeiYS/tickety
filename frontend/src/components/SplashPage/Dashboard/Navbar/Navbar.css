@@ -55,3 +55,7 @@
     opacity: 0.5;
     margin: 5px 0 5px 10px ;
 }
+
+.dashboard-navbar span.no-project-message {
+    font-size: 1rem;
+}

@@ -18,6 +18,14 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Task.init({
+    project_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'Projects',
+        key: 'id'
+      },
+    },
     column_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
