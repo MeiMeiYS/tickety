@@ -13,6 +13,11 @@ module.exports = {
         allowNull: false,
         references: { model: 'Projects' },
       },
+      kanban_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: { model: 'Kanbans' },
+      },
       column_id: {
         type: Sequelize.INTEGER,
         allowNull: false,

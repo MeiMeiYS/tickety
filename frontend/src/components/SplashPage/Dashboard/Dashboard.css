@@ -22,8 +22,11 @@
 }
 
 .dashboard-content .dashboard-main {
+    display: flex;
+    flex-direction: column;
     width: 100%;
     height: calc(100vh - 60px);
     background-color: #b4b4c6;
     overflow: scroll;
+    padding: 30px;
 }

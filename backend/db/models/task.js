@@ -26,6 +26,14 @@ module.exports = (sequelize, DataTypes) => {
         key: 'id'
       },
     },
+    kanban_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'Kanbans',
+        key: 'id'
+      },
+    },
     column_id: {
       type: DataTypes.INTEGER,
       allowNull: false,

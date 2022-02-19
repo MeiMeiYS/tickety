@@ -1,0 +1,143 @@
+.dashboard-main .main-content-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 250px;
+    background-color: whitesmoke;
+    border-radius: 10px 10px 0 0;
+    padding: 10px 20px 5px 20px;
+    /* position: relative;
+    top: 10px; */
+    border: 2px solid var(--border-input-box);
+    border-bottom: none;
+    position: relative;
+    top: 2px;
+}
+
+.dashboard-main .main-content-title:not(:first-child) {
+    margin-top: 30px;
+}
+
+.dashboard-main .main-content-card {
+    width: 100%;
+    min-width: 300px;
+    background-color: whitesmoke;
+    border-radius: 0 10px 10px 10px;
+    padding: 30px 22px 22px 22px;
+    border: 2px solid var(--border-input-box);
+}
+
+/*-----------input display & buttons----------------------------------------------------------------*/
+
+.dashboard-main .main-content-card form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.project-info .input-container-name input,
+.project-info .input-container-description textarea {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 35px;
+    width: 100%;
+    border: 1px solid var(--border-input-box);
+    border-radius: 10px;
+    margin: 10px 0;
+    padding: 0 22px;
+    transition: all 0.3s;
+    background-color: transparent;
+    outline: none;
+    font-size: 1rem;
+}
+
+.project-info .input-container-name input:disabled,
+.project-info .input-container-description textarea:disabled {
+    background-color: rgba(201, 201, 201, 0.3);
+}
+
+.project-info .input-container-description textarea {
+    min-height: 150px;
+    resize: vertical;
+    padding: 10px 22px;
+    overflow-y: visible;
+}
+
+.project-info label {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-left: 10px;
+}
+
+.project-info .btn-group {
+    margin-left: auto;
+    margin-right: 10px;
+}
+
+.project-info button {
+    width: 100px;
+    height: 30px;
+    color: var(--text-primary);
+    border: 2px solid var(--text-primary);
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.project-info button.cancel {
+    color: var(--text-grey);
+    border: 2px solid var(--text-grey);
+}
+
+.project-info button:hover {
+    background-color: var(--text-primary-opacity);
+}
+
+.project-info button.cancel:hover {
+    background-color: rgba(201, 201, 201, 0.5);
+}
+
+.project-info button:active {
+    background-color: var(--text-primary-opacity);
+    transform: translateY(2px);
+}
+
+.project-info button.cancel:active {
+    background-color: rgba(201, 201, 201, 0.5);
+}
+
+
+/*-----------confirm delete section----------------------------------------------------------------*/
+
+.project-info .confirm-delete {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--text-primary-opacity);
+    border-radius: 10px;
+    margin-bottom: 30px;
+    font-size: 1rem;
+}
+
+.project-info .confirm-delete button {
+    width: 150px;
+    margin-left: 20px;
+    transition: all 0.3s;
+}
+
+.project-info .confirm-delete button.delete {
+    color: tomato;
+    border: 2px solid tomato;
+}
+
+.project-info .confirm-delete button.delete:hover {
+    color: whitesmoke;
+    background-color: tomato;
+}

@@ -5,6 +5,7 @@ module.exports = {
     return queryInterface.bulkInsert('Tasks', [
       {
         project_id: 1,
+        kanban_id: 1,
         column_id: 1,
         content: 'Demo task 1',
         task_index: 0,
@@ -13,6 +14,7 @@ module.exports = {
       },
       {
         project_id: 1,
+        kanban_id: 1,
         column_id: 1,
         content: 'Demo task 2',
         task_index: 1,

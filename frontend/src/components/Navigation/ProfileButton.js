@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
-import anonymous_user from '../../images/anonymous_user.jpeg'
+import anonymous_user from '../../images/anonymous_user.jpeg';
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();

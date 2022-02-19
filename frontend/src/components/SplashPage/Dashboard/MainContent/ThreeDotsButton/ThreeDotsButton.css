@@ -1,0 +1,65 @@
+
+.edit-btn {
+    position: relative;
+}
+
+.edit-btn button {
+    background-color: transparent;
+    border: none;
+    height: 25px;
+    width: 10px;
+    cursor: pointer;
+}
+
+.edit-btn button i {
+    font-size: 1.2rem;
+}
+
+.edit-btn i:hover {
+    opacity: 0.5;
+}
+
+/*-----------dropdown----------------------------------------------------------------*/
+
+.edit-btn .edit-dropdown {
+    display: flex;
+    flex-direction: column;
+    width: 150px;
+    position: absolute;
+    right: 0px;
+    background-color: whitesmoke;
+    border: 1px solid var(--border-input-box);
+    border-radius: 5px;
+    padding: 5px 5px;
+}
+
+.edit-btn .edit-dropdown button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 30px;
+    border: none;
+    background-color: transparent;
+    background-color: var(--background-light-grey);
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 400;
+    color: black;
+    margin: 3px 0;
+    transition: all 0.3s;
+}
+
+.edit-btn .edit-dropdown button:hover {
+    background-color: var(--border-input-box);
+    color: whitesmoke;
+}
+
+.edit-btn .edit-dropdown button.delete-btn {
+    color: tomato;
+}
+
+.edit-btn .edit-dropdown button.delete-btn:hover {
+    color: whitesmoke;
+    background-color: tomato;
+}

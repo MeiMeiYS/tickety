@@ -14,7 +14,7 @@ const NewProjectForm = ({ setShowModal }) => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        dispatch(createProject(sessionUser.id, name, description))
+        dispatch(createProject(sessionUser.id, name.trim(), description.trim()))
             .then((res) => {
                 setShowModal(false);
                 history.push(`/${sessionUser.username}/${res.name}`);

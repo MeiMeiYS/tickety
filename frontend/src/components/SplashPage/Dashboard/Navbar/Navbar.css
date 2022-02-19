@@ -23,6 +23,16 @@
     border: none;
     background-color: transparent;
     cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dashboard-navbar a.project {
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    padding-right: 10px;
 }
 
 .dashboard-navbar a:hover,
@@ -34,6 +44,7 @@
 .dashboard-navbar button i {
     margin: 0 10px;
     font-size: 1.5rem;
+    vertical-align: middle;
     /* color: rgb(255, 255, 255); */
 }
 

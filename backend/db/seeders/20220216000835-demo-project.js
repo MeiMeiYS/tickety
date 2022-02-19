@@ -5,7 +5,7 @@ module.exports = {
     return queryInterface.bulkInsert('Projects', [
       {
         owner_id: 1,
-        name: 'Demo Project',
+        name: 'Demo-Project',
         description: 'This is a demo project.',
       },
     ], {});

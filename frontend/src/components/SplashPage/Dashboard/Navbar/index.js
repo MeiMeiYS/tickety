@@ -26,7 +26,7 @@ const Navbar = () => {
                 <span>My Projects</span>
                 { myProjectsArray.length ? myProjectsArray.map(subArr => {
                     return (
-                    <NavLink key={`project-${subArr[1].id}`} exact to={`/${sessionUser.username}/${subArr[1].name}`}>
+                    <NavLink className='project' key={`project-${subArr[1].id}`} exact to={`/${sessionUser.username}/${subArr[1].name}`}>
                         <i className="fa-solid fa-circle" style={{ fontSize: '0.5rem'}}></i>
                         <span>{subArr[1].name}</span>
                     </NavLink>)

@@ -45,11 +45,11 @@ router.get('/mine', requireAuth, asyncHandler(async (req, res) => {
 // create a project
 router.post('/', requireAuth, projectValidators, asyncHandler(async (req, res) => {
     const { owner_id, name, description } = req.body;
-    console.log('@@@@@@@@@@', req.body)
 
     const errors = [];
-    const checkProjects = await Project.findAll({ where: { name } });
+    const checkProjects = await Project.findAll({ where: { name, owner_id } });
     if (checkProjects.length) errors.push('This project name already exist.')
+    if (name.includes(' ')) errors.push('Project name cannot contain space.');
     if (errors.length) return res.status(400).json({ errors })
 
     // create project
@@ -57,11 +57,45 @@ router.post('/', requireAuth, projectValidators, asyncHandler(async (req, res) =
     return res.json(project);
 }));
 
+// edit a project
+router.put('^/:id(\\d+)', requireAuth, projectValidators, asyncHandler(async (req, res) => {
+    const { user } = req;
+    const { name, description } = req.body;
+    const project_id = parseInt(req.params.id, 10);
+    const project = await Project.findByPk(project_id, {
+        where: {
+            owner_id: user.id,
+            archive: false
+        }, include: {
+            model: Kanban,
+            include: {
+                model: Column,
+                include: Task
+            }
+        }
+    });
+
+    // check if project exist
+    if (!project) return res.status(400).json({ errors: ['Project does not exist. Please refresh the page.'] });
+    // check if user owns the project
+    if (user.id !== project.owner_id)res.status(401).json({ errors: ['Unauthorized.'] });
+    // check if user already use this project name
+    const errors = [];
+    const checkProjects = await Project.findOne({ where: { name, owner_id: user.id } });
+    if (checkProjects.id !== project.id) errors.push('This project name already exist.');
+    if (name.includes(' ')) errors.push('Project name cannot contain space.');
+    if (errors.length) return res.status(400).json({ errors })
+
+    // update project details
+    await project.update({ name, description });
+    return res.json(project);
+}));
+
 // delete a project
 router.delete('^/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
     const { user } = req;
     const project_id = parseInt(req.params.id, 10);
-    const project = await Project.findByPk(project_id, { include: Kanban });
+    const project = await Project.findByPk(project_id);
 
     // check if project exist
     if (!project) return res.status(400).json({ errors: ['Project does not exist. Please refresh the page.'] });
