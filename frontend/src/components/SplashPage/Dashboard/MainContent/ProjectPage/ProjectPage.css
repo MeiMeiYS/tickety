@@ -28,7 +28,7 @@
     border: 2px solid var(--border-input-box);
 }
 
-/*-----------input display & buttons----------------------------------------------------------------*/
+/*-----------input display & form buttons----------------------------------------------------------------*/
 
 .dashboard-main .main-content-card form {
     display: flex;
@@ -37,7 +37,9 @@
 }
 
 .project-info .input-container-name input,
-.project-info .input-container-description textarea {
+.project-info .input-container-description textarea,
+.kanban-boards .input-container-name input,
+.kanban-boards .input-container-description textarea {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -49,7 +51,8 @@
     margin: 10px 0;
     padding: 0 22px;
     transition: all 0.3s;
-    background-color: transparent;
+    /* background-color: transparent; */
+    background-color: whitesmoke;
     outline: none;
     font-size: 1rem;
 }
@@ -59,25 +62,29 @@
     background-color: rgba(201, 201, 201, 0.3);
 }
 
-.project-info .input-container-description textarea {
+.project-info .input-container-description textarea,
+.kanban-boards .input-container-description textarea {
     min-height: 150px;
     resize: vertical;
     padding: 10px 22px;
     overflow-y: visible;
 }
 
-.project-info label {
+.project-info label,
+.kanban-boards label {
     font-size: 1rem;
     font-weight: 500;
     margin-left: 10px;
 }
 
-.project-info .btn-group {
+.project-info .btn-group,
+.kanban-boards .btn-group {
     margin-left: auto;
     margin-right: 10px;
 }
 
-.project-info button {
+.project-info button,
+.kanban-boards button {
     width: 100px;
     height: 30px;
     color: var(--text-primary);
@@ -90,26 +97,32 @@
     transition: 0.3s;
 }
 
-.project-info button.cancel {
+.project-info button.cancel,
+.kanban-boards button.cancel {
     color: var(--text-grey);
     border: 2px solid var(--text-grey);
 }
 
-.project-info button:hover {
+.project-info button.submit:hover,
+.kanban-boards button.submit:hover {
     background-color: var(--text-primary-opacity);
 }
 
-.project-info button.cancel:hover {
+.project-info button.cancel:hover,
+.kanban-boards button.cancel:hover {
     background-color: rgba(201, 201, 201, 0.5);
 }
 
-.project-info button:active {
+.project-info button.submit:active,
+.kanban-boards button.submit:active {
     background-color: var(--text-primary-opacity);
     transform: translateY(2px);
 }
 
-.project-info button.cancel:active {
+.project-info button.cancel:active,
+.kanban-boards button.cancel:active {
     background-color: rgba(201, 201, 201, 0.5);
+    transform: translateY(2px);
 }
 
 
@@ -141,3 +154,54 @@
     color: whitesmoke;
     background-color: tomato;
 }
+
+/*-----------new kanban board button & form----------------------------------------------------------------*/
+
+.kanban-boards .new-kanban-btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 5px;
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: black;
+    margin: 5px 0;
+    transition: all 0.3s;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: auto;
+    height: auto;
+}
+
+.kanban-boards .new-kanban-btn.active {
+    background-color: rgba(201, 201, 201, 0.3);
+    padding: 10px 20px;
+    border-radius: 10px 10px 0 0;
+    margin-bottom: 0;
+}
+
+.kanban-boards .new-kanban-btn i {
+    margin: 0 10px 0 0;
+    font-size: 1.5rem;
+    vertical-align: middle;
+}
+
+.kanban-boards .new-kanban-btn:hover {
+    color: var(--text-grey);
+}
+
+.kanban-boards .new-kanban-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: rgba(201, 201, 201, 0.3);
+    padding: 20px;
+    border-radius: 0 10px 10px 10px;
+}
+
+/* input styles are on top with other inputs */

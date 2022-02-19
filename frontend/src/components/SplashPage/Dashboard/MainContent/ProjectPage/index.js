@@ -1,138 +1,79 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from "react-router-dom";
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import './ProjectPage.css';
 import ThreeDotsButton from '../ThreeDotsButton';
-import { editProject, deleteProject } from '../../../../../store/myProjects';
+import ProejctInfo from './ProjectInfo';
+
 
 const ProjectPage = ({ params, isMyProject, projectId }) => {
-    const dispatch = useDispatch();
-    const history = useHistory();
     const currentProject = useSelector((state) => state.myProjects[projectId]);
-
+    const [ showNewKanbanForm, setShowNewKanbanForm ] = useState(false);
+    const [ name, setName ] = useState('');
+    const [ description, setDescription ] = useState('');
     const [ errors, setErrors ] = useState([]);
-    const [ projectName, setProjectName ] = useState('');
-    const [ projectDescription, setProjectDescription ] = useState('');
-    const [ viewOnlyMode, setViewOnlyMode ] = useState(true);
-    const [ showConfirmDelete, setShowConfirmDelete ] = useState(false);
 
 
-    useEffect(() => {
-        if (currentProject) {
-            setProjectName(currentProject.name);
-            setProjectDescription(currentProject.description);
-        }
-      }, [currentProject]);
-
-    const showEditForm = e => {
-        e.preventDefault();
-        setViewOnlyMode(false);
-    }
-
-    const closeEditForm = e => {
-        e.preventDefault();
-        setProjectName(currentProject.name);
-        setProjectDescription(currentProject.description);
-        setErrors([]);
-        setViewOnlyMode(true);
-    }
-
-    const showDeleteButton = e => {
-        e.preventDefault();
-        setShowConfirmDelete(true);
-    }
-
-    const hideDeleteButton = e => {
-        e.preventDefault();
-        setShowConfirmDelete(false);
-    }
-
-    const handleEdit = e => {
-        e.preventDefault();
-        setErrors([]);
-        dispatch(editProject(projectId, projectName.trim(), projectDescription.trim()))
-        .then(() => {
-            setViewOnlyMode(true);
-            history.push(`/${params.username}/${projectName}`);
-        })
-        .catch(async (res) => {
-            const data = await res.json();
-            if (data && data.errors) setErrors(data.errors);
-        });
-    }
-
-    const handleDelete = e => {
-        e.preventDefault();
-        dispatch(deleteProject(projectId))
-        .then(async (res) => {
-            const message = await res.json();
-            if (message === 'success') history.push('/');
-        })
-        .catch(async (res) => {
-            const data = await res.json();
-            if (data && data.errors) setErrors(data.errors);
-        });
-    }
 
     return(
         <>
-            {/* -----------------------------------------project section----------------------------------------- */}
-            <div className='main-content-title'>
-                <h2>Project info</h2>
-                { isMyProject &&
-                    <ThreeDotsButton thisElement='project' showEditForm={showEditForm} showDeleteButton={showDeleteButton}/>
-                }
-            </div>
-            <div className='main-content-card project-info'>
-                {showConfirmDelete &&
-                    <div className='confirm-delete'>
-                        <p>Are you sure you want to permanently delete this project?</p>
-                        <button type='button' onClick={hideDeleteButton}>Maybe later</button>
-                        <button className='delete' type='button' onClick={handleDelete}>Confirm delete</button>
-                    </div>
-                }
-                <form onSubmit={handleEdit}>
-                    <div className="input-container-name">
-                        <label htmlFor="edit-project-name-input">
-                            Project name
-                        </label>
-                        <input
-                        id="new-project-name-input"
-                        type="text"
-                        value={projectName}
-                        onChange={(e) => setProjectName(e.target.value)}
-                        disabled={viewOnlyMode}
-                        required
-                        />
-                    </div>
-                    <div className="input-container-description">
-                        <label htmlFor="edit-project-description-input">
-                            Description
-                        </label>
-                        <textarea
-                        id="new-project-description-input"
-                        value={projectDescription}
-                        onChange={(e) => setProjectDescription(e.target.value)}
-                        disabled={viewOnlyMode}
-                        />
-                    </div>
-                    <ul>
-                        {errors.map((error, idx) => <li className="error-message" key={idx}>{error}</li>)}
-                    </ul>
-                    {!viewOnlyMode &&
-                        <div className='btn-group'>
-                            <button className='cancel' type="button" onClick={closeEditForm}>Cancel</button>
-                            <button className='submit' type="submit">Save</button>
-                        </div>
-                    }
-                </form>
-            </div>
-            {/* -----------------------------------------kanban section----------------------------------------- */}
+            <ProejctInfo params={params} isMyProject={isMyProject} projectId={projectId} currentProject={currentProject}/>
             <div className='main-content-title'>
                 <h2>Kanban boards</h2>
             </div>
-            <div className='main-content-card project-info'>
+            <div className='main-content-card kanban-boards'>
+                {showNewKanbanForm ?
+                    <>
+                        <button className='new-kanban-btn active' type='button' onClick={e => setShowNewKanbanForm(false)}>
+                            <i class="fa-solid fa-circle-minus"></i>
+                            <span>New Kanban</span>
+                        </button>
+                        <form className='new-kanban-form'>
+                            <div className="input-container-name">
+                                <label htmlFor="new-project-name-input">
+                                    Kanban name
+                                </label>
+                                <input
+                                id="new-project-name-input"
+                                type="text"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                required
+                                />
+                            </div>
+                            <div className="input-container-description">
+                                <label htmlFor="new-project-description-input">
+                                    Description
+                                </label>
+                                <textarea
+                                id="new-project-description-input"
+                                value={description}
+                                onChange={(e) => setDescription(e.target.value)}
+                                />
+                            </div>
+                            <ul>
+                                {errors.map((error, idx) => <li className="error-message" key={idx}>{error}</li>)}
+                            </ul>
+                            <div className='btn-group'>
+                                <button className='cancel' type="button" onClick={e => setShowNewKanbanForm(false)}>Cancel</button>
+                                <button className='submit' type="submit">Save</button>
+                            </div>
+                        </form>
+                    </>
+                    :
+                    <button className='new-kanban-btn' type='button' onClick={e => setShowNewKanbanForm(true)}>
+                        <i className="fa-solid fa-circle-plus"></i>
+                        <span>New Kanban</span>
+                    </button>
+                }
 
+                {currentProject?.Kanbans ? currentProject?.Kanbans.map(kanban => {
+                    return (
+                        <div>
+                            <h3>{kanban.name}</h3>
+                            <p>{kanban.description}</p>
+                        </div>
+                    )
+                }) : <p>You have no kanban board yet</p>}
             </div>
         </>
     )
