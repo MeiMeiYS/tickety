@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import ThreeDotsButton from '../ThreeDotsButton';
-import { deleteKanban } from '../../../../../store/kanbans';
+import { editKanban, deleteKanban } from '../../../../../store/kanbans';
 import { fetchOneProjectsById } from '../../../../../store/myProjects';
 
 const EachKanbanCard = ({ kanban, params }) => {
@@ -42,6 +42,16 @@ const EachKanbanCard = ({ kanban, params }) => {
 
     const handleUpdateKanban = e => {
         e.preventDefault();
+        dispatch(editKanban(kanban.project_id, kanban.id, name.trim(), description.trim()))
+        .then(() => {
+            setViewOnlyMode(true);
+            // update myProject redux store
+            dispatch(fetchOneProjectsById(kanban.project_id));
+        })
+        .catch(async (res) => {
+            const data = await res.json();
+            if (data && data.errors) setErrors(data.errors);
+        });
 
     }
 

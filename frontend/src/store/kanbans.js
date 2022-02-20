@@ -44,21 +44,22 @@ export const createKanban = (project_id, name, description) => async (dispatch) 
     return response;
 };
 
-// export const editProject = (projectId, name, description) => async (dispatch) => {
-//   const response = await csrfFetch(`/api/projects/${projectId}`, {
-//     method: "PUT",
-//     body: JSON.stringify({
-//       name,
-//       description
-//     }),
-//   });
-//   const project = await response.json();
-//   if (response.ok) {
-//     dispatch(addProject(project));
-//     // return project
-//   }
-//   return response;
-// };
+export const editKanban = (project_id, kanban_id, name, description) => async (dispatch) => {
+  const response = await csrfFetch(`/api/kanbans/${kanban_id}`, {
+    method: "PUT",
+    body: JSON.stringify({
+      project_id,
+      kanban_id,
+      name,
+      description
+    }),
+  });
+  const kanban = await response.json();
+  if (response.ok) {
+    dispatch(addkanban(kanban));
+  }
+  return response;
+};
 
 export const deleteKanban = (id) => async (dispatch) => {
   const response = await csrfFetch(`/api/kanbans/${id}`, {

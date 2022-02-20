@@ -20,7 +20,7 @@ const kanbanValidators = [
         .custom((value, { req }) => {
             return Kanban.findOne({ where: { project_id: req.body.project_id, name: value } })
                 .then(kanban => {
-                    if (kanban) {
+                    if (kanban && kanban.id !== req.body.kanban_id) {
                         return Promise.reject('This kanban name already been used within this project.')
                     }
                 })
@@ -80,13 +80,33 @@ router.post('/', requireAuth, kanbanValidators, asyncHandler(async (req, res) =>
     return res.json(kanban);
 }));
 
+// edit a kanban
+router.put('^/:id(\\d+)', requireAuth, kanbanValidators, asyncHandler(async (req, res) => {
+    const { user } = req;
+    const { project_id, kanban_id, name, description } = req.body;
+    const kanbanId = parseInt(req.params.id, 10);
+    const kanban = await Kanban.findByPk(kanbanId);
+
+    // check if kanban exist
+    if (!kanban) return res.status(400).json({ errors: ['Kanban does not exist. Please refresh the page.'] });
+    // check if user is authorized member/owner
+    // if (user.id !== project.owner_id)res.status(401).json({ errors: ['Unauthorized.'] });
+
+    // update project details
+    await kanban.update({ name, description });
+    return res.json(kanban);
+}));
+
 // delete one kanban by id
 router.delete('^/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
     const { user } = req;
     const kanban_id = parseInt(req.params.id, 10);
     const kanban = await Kanban.findByPk(kanban_id);
 
-    //todo, check if youre project member or owner
+     // check if kanban exist
+     if (!kanban) return res.status(400).json({ errors: ['Kanban does not exist. Please refresh the page.'] });
+     // check if user is authorized member/owner
+     // if (user.id !== project.owner_id)res.status(401).json({ errors: ['Unauthorized.'] });
 
     // delete all tasks, columns, and then delete kanban
     await Task.destroy({ where: {kanban_id} });

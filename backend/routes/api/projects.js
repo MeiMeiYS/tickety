@@ -20,7 +20,7 @@ const projectValidators = [
         .custom((value, { req }) => {
             return Project.findOne({ where: { name: value } })
                 .then(project => {
-                    if (project) {
+                    if (project && project.id !== req.body.project_id) {
                         return Promise.reject('This project name already been used by you.')
                     }
                 })

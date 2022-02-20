@@ -58,10 +58,11 @@ export const createProject = (owner_id, name, description) => async (dispatch) =
     return response;
 };
 
-export const editProject = (projectId, name, description) => async (dispatch) => {
-  const response = await csrfFetch(`/api/projects/${projectId}`, {
+export const editProject = (project_id, name, description) => async (dispatch) => {
+  const response = await csrfFetch(`/api/projects/${project_id}`, {
     method: "PUT",
     body: JSON.stringify({
+      project_id,
       name,
       description
     }),

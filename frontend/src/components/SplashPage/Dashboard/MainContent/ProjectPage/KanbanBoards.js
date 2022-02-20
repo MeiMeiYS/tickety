@@ -25,7 +25,7 @@ const KanbanBoards = ({ params, projectId, currentProject }) => {
 
                 {currentProject?.Kanbans?.length ? currentProject.Kanbans.map(kanban => {
                     return (
-                        <EachKanbanCard kanban={kanban} params={params}/>
+                        <EachKanbanCard kanban={kanban} params={params} key={`EachKanbanCard-${kanban.id}`}/>
                     )
                 }) : <p>You have no kanban board yet</p> }
             </div>
