@@ -213,6 +213,10 @@
 
 /*-----------kanban list----------------------------------------------------------------*/
 
+.no-kanban-ptag {
+    margin-top: 20px;
+    color: var(--text-grey);
+}
 
 .kanban-boards .kanban-details {
     display: flex;

@@ -3,14 +3,14 @@ import { NavLink } from 'react-router-dom';
 import './Navbar.css';
 import NewProjectModal from '../NewProjectModal';
 
-const Navbar = () => {
+const Navbar = ({ navbarShowing }) => {
     const sessionUser = useSelector((state) => state.session.user);
     const myProjects = useSelector((state) => state.myProjects);
     const myProjectsArray = Object.entries(myProjects);
 
 
     return (
-        <div className='dashboard-navbar'>
+        <div className={`dashboard-navbar ${navbarShowing ? '' : 'hidden-state'}`}>
             <div className='nav-btn-group'>
                 <NavLink exact to="/">
                     <i className="fa-solid fa-gauge-high"></i>

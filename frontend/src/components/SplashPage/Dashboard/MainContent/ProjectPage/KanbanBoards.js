@@ -27,7 +27,7 @@ const KanbanBoards = ({ params, projectId, currentProject }) => {
                     return (
                         <EachKanbanCard kanban={kanban} params={params} key={`EachKanbanCard-${kanban.id}`}/>
                     )
-                }) : <p>You have no kanban board yet</p> }
+                }) : <p className='no-kanban-ptag'>You have no kanban board yet...</p> }
             </div>
         </>
     )

@@ -8,6 +8,8 @@ import { fetchAllMyProjects } from '../../../store/myProjects';
 const Dashboard = ({ params }) => {
     const dispatch = useDispatch();
     const [isLoaded, setIsLoaded] = useState(false);
+    const [navbarShowing, setNavbarShowing] = useState(true);
+    console.log(navbarShowing)
 
     useEffect(() => {
         dispatch(fetchAllMyProjects()).then(() => setIsLoaded(true));
@@ -18,8 +20,11 @@ const Dashboard = ({ params }) => {
         <>
             {isLoaded &&
                 <div className='dashboard-content'>
-                    <Navbar />
-                    <MainContent params={params} />
+                    <Navbar navbarShowing={navbarShowing}/>
+                    <button type="button" className={`navbar-switch-btn ${navbarShowing ? '' : 'hidden-state'}`} onClick={ e => setNavbarShowing(preState => !preState)}>
+                        {navbarShowing ? <i className="fa-solid fa-angle-left"></i> : <i className="fa-solid fa-angle-right"></i>}
+                    </button>
+                    <MainContent params={params}/>
                 </div>
             }
         </>

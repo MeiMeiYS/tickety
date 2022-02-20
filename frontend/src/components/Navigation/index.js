@@ -29,7 +29,7 @@ function Navigation({ isLoaded }){
   }
 
   return (
-    <nav className='navbar-top'>
+    <nav className={`navbar-top ${sessionUser ? 'dashboard' : ''}`}>
           <NavLink exact to="/" className='navbar-logo'>
             <span><img src={tickety_logo} alt='logo'></img></span>
             Tickety

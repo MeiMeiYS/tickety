@@ -1,4 +1,5 @@
 .dashboard-content {
+    position: relative;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -6,27 +7,65 @@
     width: 100%;
     min-height: calc(100vh - 60px);
     /* padding: 0 20px; */
-    background-color: var(--background-primary);
-    background: linear-gradient(180deg, var(--background-primary) 0%, #f5f5f5 100%);
+    background-color: var(--background-dashboard);
+    /* background-color: var(--background-primary);
+    background: linear-gradient(180deg, var(--background-primary) 0%, #f5f5f5 100%); */
 }
 
-.dashboard-content .dashboard-navbar{
+.dashboard-content .dashboard-navbar {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 400px;
+    width: 280px;
+    min-width: 280px;
     height: calc(100vh - 60px);
-    background-color: #a8a1c3;
+    background-color: var(--background-navbar);
     padding: 10px;
     overflow: scroll;
+    border-right: 1px solid var(--border-input-box);
+    transition: all 0.3s;
 }
 
 .dashboard-content .dashboard-main {
+    position: relative;
     display: flex;
     flex-direction: column;
     width: 100%;
     height: calc(100vh - 60px);
-    background-color: #b4b4c6;
+    background-color: var(--background-dashboard);
     overflow: scroll;
     padding: 30px;
+    transition: all 0.3s;
+}
+
+.dashboard-content .navbar-switch-btn {
+    position: absolute;
+    background-color: var(--background-navbar);
+    z-index: 2;
+    left: 279px;
+    top: 20px;
+    width: 45px;
+    height: 40px;
+    border: 1px solid var(--text-grey);
+    border-left: none;
+    border-radius: 0 22px 22px 0;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    color: whitesmoke;
+}
+
+.dashboard-content .navbar-switch-btn:hover {
+    color: rgba(245, 245, 245, 0.5);
+}
+
+.dashboard-content .dashboard-navbar.hidden-state {
+    position: absolute;
+    transform: translateX(-280px)
+}
+
+.dashboard-content .navbar-switch-btn.hidden-state {
+    position: absolute;
+    left: 0px;
 }

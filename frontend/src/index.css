@@ -8,7 +8,9 @@
     --background-primary: #d7d1f0;
     --background-secondary: #b9d2f7;
     --background-light-grey: rgba(201, 201, 201, 0.2);
-    /* --background-inputbox: #000000; */
+    --background-dashboard: #bbb8d5;
+    /* --background-navbar: #4169a0; */
+    --background-navbar: #544d93;
     --border-input-box: #ababab;
   }
 
@@ -28,6 +30,7 @@
   /* background: rgb(215,209,240);
   background: linear-gradient(180deg, rgba(215,209,240,1) 0%, rgba(245,245,245,1) 50%, rgba(170,211,237,1) 100%); */
   font-size: 16px;
+  /* position: relative; */
 }
 
 .error-message {
