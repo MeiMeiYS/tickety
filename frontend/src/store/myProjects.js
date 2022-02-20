@@ -31,6 +31,16 @@ export const fetchAllMyProjects = () => async (dispatch) => {
   }
 };
 
+export const fetchOneProjectsById = (projectId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/projects/${projectId}`);
+
+  if (response.ok) {
+    const project = await response.json();
+    dispatch(addProject(project));
+    return;
+  }
+};
+
 export const createProject = (owner_id, name, description) => async (dispatch) => {
   const response = await csrfFetch("/api/projects", {
     method: "POST",

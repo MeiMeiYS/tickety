@@ -1,9 +1,9 @@
 
-.edit-btn {
+#edit-btn {
     position: relative;
 }
 
-.edit-btn button {
+#edit-btn button {
     background-color: transparent;
     border: none;
     height: 25px;
@@ -11,21 +11,24 @@
     cursor: pointer;
 }
 
-.edit-btn button i {
+#edit-btn button i {
+    color: black;
     font-size: 1.2rem;
 }
 
-.edit-btn i:hover {
+#edit-btn i:hover {
+    color: black;
     opacity: 0.5;
 }
 
 /*-----------dropdown----------------------------------------------------------------*/
 
-.edit-btn .edit-dropdown {
+#edit-btn .edit-dropdown {
     display: flex;
     flex-direction: column;
     width: 150px;
     position: absolute;
+    z-index: 2;
     right: 0px;
     background-color: whitesmoke;
     border: 1px solid var(--border-input-box);
@@ -33,7 +36,7 @@
     padding: 5px 5px;
 }
 
-.edit-btn .edit-dropdown button {
+#edit-btn .edit-dropdown button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -50,16 +53,16 @@
     transition: all 0.3s;
 }
 
-.edit-btn .edit-dropdown button:hover {
+#edit-btn .edit-dropdown button:hover {
     background-color: var(--border-input-box);
     color: whitesmoke;
 }
 
-.edit-btn .edit-dropdown button.delete-btn {
+#edit-btn .edit-dropdown button.delete-btn {
     color: tomato;
 }
 
-.edit-btn .edit-dropdown button.delete-btn:hover {
+#edit-btn .edit-dropdown button.delete-btn:hover {
     color: whitesmoke;
     background-color: tomato;
 }

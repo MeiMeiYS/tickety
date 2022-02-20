@@ -5,7 +5,7 @@
     align-items: center;
     background-color: whitesmoke;
     border-radius: 12px;
-    width: 60%;
+    width: 60vw;
     max-width: 600px;
     min-width: 450px;
     padding: 30px 50px;
@@ -65,4 +65,9 @@
 .new-project-form-box button:active {
     background-color: var(--text-primary-opacity);
     transform: translateY(2px);
+}
+
+.new-project-form-box ul {
+    padding: 0 10px;
+    width: 100%;
 }

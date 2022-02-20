@@ -2,10 +2,12 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import session from './session';
 import myProjects from './myProjects';
+import kanbans from './kanbans';
 
 const rootReducer = combineReducers({
   session,
-  myProjects
+  myProjects,
+  kanbans
 });
 
 let enhancer;

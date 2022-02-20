@@ -7,8 +7,6 @@
     background-color: whitesmoke;
     border-radius: 10px 10px 0 0;
     padding: 10px 20px 5px 20px;
-    /* position: relative;
-    top: 10px; */
     border: 2px solid var(--border-input-box);
     border-bottom: none;
     position: relative;
@@ -83,8 +81,10 @@
     margin-right: 10px;
 }
 
-.project-info button,
-.kanban-boards button {
+.project-info .btn-group button,
+.project-info .confirm-delete button,
+.kanban-boards .btn-group button,
+.kanban-boards .confirm-delete button {
     width: 100px;
     height: 30px;
     color: var(--text-primary);
@@ -128,29 +128,34 @@
 
 /*-----------confirm delete section----------------------------------------------------------------*/
 
-.project-info .confirm-delete {
+.project-info .confirm-delete,
+.kanban-boards .confirm-delete {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    background-color: var(--text-primary-opacity);
+    background-color: rgba(255, 99, 71, 0.2);
     border-radius: 10px;
     margin-bottom: 30px;
     font-size: 1rem;
+    padding: 0 20px;
 }
 
-.project-info .confirm-delete button {
+.project-info .confirm-delete button,
+.kanban-boards .confirm-delete button {
     width: 150px;
     margin-left: 20px;
     transition: all 0.3s;
 }
 
-.project-info .confirm-delete button.delete {
+.project-info .confirm-delete button.delete,
+.kanban-boards .confirm-delete button.delete {
     color: tomato;
     border: 2px solid tomato;
 }
 
-.project-info .confirm-delete button.delete:hover {
+.project-info .confirm-delete button.delete:hover,
+.kanban-boards .confirm-delete button.delete:hover {
     color: whitesmoke;
     background-color: tomato;
 }
@@ -205,3 +210,40 @@
 }
 
 /* input styles are on top with other inputs */
+
+/*-----------kanban list----------------------------------------------------------------*/
+
+
+.kanban-boards .kanban-details {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    background-color: rgba(201, 201, 201, 0.3);
+    padding: 10px 20px;
+    margin: 10px 0;
+    border-radius: 10px;
+    /* max-height: 250px; */
+    /* overflow: scroll; */
+}
+
+.kanban-boards .kanban-details .left {
+    width: 100%;
+}
+
+.kanban-boards .kanban-details a {
+    font-size: 1.2rem;
+    color: black;
+}
+
+.kanban-boards .kanban-details a:hover {
+    color: var(--text-grey);
+}
+
+.kanban-boards .kanban-details p {
+    display: block;
+    font-size: 1rem;
+    margin-top: 10px;
+    color: var(--text-grey);
+    white-space: pre-line;
+}

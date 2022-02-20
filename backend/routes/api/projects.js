@@ -3,8 +3,7 @@ const { check } = require("express-validator");
 const asyncHandler = require("express-async-handler");
 const { handleValidationErrors } = require("../../utils/validation");
 const { requireAuth } = require("../../utils/auth");
-// const { User } = require("../../db/models");
-const { Project, Kanban, Column, Task, Invite, Member  } = require("../../db/models");
+const { Project, Kanban, Column, Task, Invite, Member } = require("../../db/models");
 
 const router = express.Router();
 
@@ -15,7 +14,20 @@ const projectValidators = [
         .isLength({ min: 3 })
         .withMessage('Project name must be at least 3 characters long.')
         .isLength({ max: 100 })
-        .withMessage('Project name is too long.'),
+        .withMessage('Project name is too long.')
+        .matches(/^[a-z0-9\-_]+$/i)
+        .withMessage("Project names must be alphanumeric and can only contain '_' and '-'")
+        .custom((value, { req }) => {
+            return Project.findOne({ where: { name: value } })
+                .then(project => {
+                    if (project) {
+                        return Promise.reject('This project name already been used by you.')
+                    }
+                })
+        }),
+    check('description')
+        .isLength({ max: 2200 })
+        .withMessage('Description cannot be over 2200 characters.'),
     handleValidationErrors
 ];
 
@@ -26,14 +38,9 @@ router.get('/mine', requireAuth, asyncHandler(async (req, res) => {
         where: {
             owner_id: user.id,
             archive: false
-        }, include: {
-            model: Kanban,
-            include: {
-                model: Column,
-                include: Task
-            }
-        }
+        }, include: Kanban
     });
+
     const data = {};
     projects.forEach(project => {
         data[project.id] = project
@@ -42,15 +49,23 @@ router.get('/mine', requireAuth, asyncHandler(async (req, res) => {
     return res.json(data);
 }));
 
+// load one project by id
+router.get('^/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
+    const { user } = req;
+    const project_id = parseInt(req.params.id, 10)
+    const project = await Project.findByPk(project_id, {
+        where: {
+            owner_id: user.id,
+            archive: false
+        }, include: Kanban
+    });
+
+    return res.json(project);
+}));
+
 // create a project
 router.post('/', requireAuth, projectValidators, asyncHandler(async (req, res) => {
     const { owner_id, name, description } = req.body;
-
-    const errors = [];
-    const checkProjects = await Project.findAll({ where: { name, owner_id } });
-    if (checkProjects.length) errors.push('This project name already exist.')
-    if (name.includes(' ')) errors.push('Project name cannot contain space.');
-    if (errors.length) return res.status(400).json({ errors })
 
     // create project
     const project = await Project.create({ owner_id, name, description })
@@ -66,25 +81,13 @@ router.put('^/:id(\\d+)', requireAuth, projectValidators, asyncHandler(async (re
         where: {
             owner_id: user.id,
             archive: false
-        }, include: {
-            model: Kanban,
-            include: {
-                model: Column,
-                include: Task
-            }
-        }
+        }, include: Kanban
     });
 
     // check if project exist
     if (!project) return res.status(400).json({ errors: ['Project does not exist. Please refresh the page.'] });
     // check if user owns the project
     if (user.id !== project.owner_id)res.status(401).json({ errors: ['Unauthorized.'] });
-    // check if user already use this project name
-    const errors = [];
-    const checkProjects = await Project.findOne({ where: { name, owner_id: user.id } });
-    if (checkProjects.id !== project.id) errors.push('This project name already exist.');
-    if (name.includes(' ')) errors.push('Project name cannot contain space.');
-    if (errors.length) return res.status(400).json({ errors })
 
     // update project details
     await project.update({ name, description });
