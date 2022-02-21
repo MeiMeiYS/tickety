@@ -22,6 +22,18 @@ function LoginFormPage() {
       });
   };
 
+  const handleDemoLogin = (e) => {
+    e.preventDefault();
+    setErrors([]);
+    const data = { credential: 'demo@aa.io', password: 'password'}
+    return dispatch(sessionActions.login(data))
+      .catch(async (res) => {
+        const data = await res.json();
+        if (data && data.errors) setErrors(data.errors);
+      });
+  };
+
+
   return (
     <div className="login-page-content">
       <div className="login-form-box">
@@ -57,6 +69,7 @@ function LoginFormPage() {
             ))}
           </ul>
           <button type="submit">Log In</button>
+          <button className='demo-btn' type="button" onClick={handleDemoLogin}>Demo site</button>
         </form>
       </div>
     </div>

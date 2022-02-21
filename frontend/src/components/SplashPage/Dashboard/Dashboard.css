@@ -42,7 +42,7 @@
 .dashboard-content .navbar-switch-btn {
     position: absolute;
     background-color: var(--background-navbar);
-    z-index: 2;
+    z-index: 1;
     left: 279px;
     top: 20px;
     width: 45px;
