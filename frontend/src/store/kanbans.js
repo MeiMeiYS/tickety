@@ -68,15 +68,36 @@ export const deleteKanban = (id) => async (dispatch) => {
     return response;
 };
 
+export const createColumn = (project_id, kanban_id, name) => async (dispatch) => {
+  const response = await csrfFetch("/api/columns", {
+    method: "POST",
+    body: JSON.stringify({
+      project_id,
+      kanban_id,
+      name
+    }),
+  });
+
+    return response;
+};
+
+export const editColumn = (column_id, kanban_id, name) => async (dispatch) => {
+  const response = await csrfFetch(`/api/columns/${column_id}`, {
+    method: "PUT",
+    body: JSON.stringify({
+      kanban_id,
+      name,
+    }),
+  });
+
+  return response;
+};
+
 export const deleteColumn = (column_id) => async (dispatch) => {
   const response = await csrfFetch(`/api/columns/${column_id}`, {
     method: "DELETE",
   });
 
-  if (response.ok) {
-    const kanban = await response.json();
-    dispatch(addkanban(kanban));
-  }
     return response;
 };
 

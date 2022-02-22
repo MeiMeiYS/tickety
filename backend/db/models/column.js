@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       Column.belongsTo(models.Kanban, { foreignKey: 'kanban_id' });
       Column.hasMany(models.Task, { foreignKey: 'column_id' });
     }
+
   };
   Column.init({
     project_id: {

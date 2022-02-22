@@ -40,7 +40,8 @@ router.get('^/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
         }, include: {
             model: Column,
             include: Task
-        }
+        },
+        order: [[Column, 'column_index', 'ASC']]
     });
 
     return res.json(kanban);
@@ -74,7 +75,8 @@ router.post('/', requireAuth, kanbanValidators, asyncHandler(async (req, res) =>
         }, include: {
             model: Column,
             include: Task
-        }
+        },
+        order: [[Column, 'column_index', 'ASC']]
     });
 
     return res.json(kanban);
@@ -111,7 +113,7 @@ router.delete('^/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
     // delete all tasks, columns, and then delete kanban
     await Task.destroy({ where: {kanban_id} });
     await Column.destroy({ where: {kanban_id} });
-    kanban.destroy();
+    await kanban.destroy();
 
     return res.json('success');
 }));

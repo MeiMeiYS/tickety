@@ -117,7 +117,7 @@ router.delete('^/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
     await Kanban.destroy({ where: {project_id} });
 
     // delete the project
-    project.destroy();
+    await project.destroy();
     return res.json('success');
 }));
 
