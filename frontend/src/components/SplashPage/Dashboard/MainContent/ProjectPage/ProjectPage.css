@@ -134,11 +134,16 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    background-color: rgba(255, 99, 71, 0.2);
+    background-color: #f8d9d3;
     border-radius: 10px;
     margin-bottom: 30px;
     font-size: 1rem;
     padding: 0 20px;
+}
+
+.project-info .confirm-delete p#confirm-delete-text,
+.kanban-boards .confirm-delete p#confirm-delete-text {
+    color: black;
 }
 
 .project-info .confirm-delete button,

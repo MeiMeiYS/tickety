@@ -20,7 +20,6 @@ export const fetchOneKanbanById = (id) => async (dispatch) => {
 
   if (response.ok) {
     const kanban = await response.json();
-    console.log(kanban)
     dispatch(addkanban(kanban));
     return;
   }
@@ -66,6 +65,18 @@ export const deleteKanban = (id) => async (dispatch) => {
     method: "DELETE"
   });
     if (response.ok)  dispatch(removeKanban(id));
+    return response;
+};
+
+export const deleteColumn = (column_id) => async (dispatch) => {
+  const response = await csrfFetch(`/api/columns/${column_id}`, {
+    method: "DELETE",
+  });
+
+  if (response.ok) {
+    const kanban = await response.json();
+    dispatch(addkanban(kanban));
+  }
     return response;
 };
 

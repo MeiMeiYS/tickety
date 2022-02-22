@@ -9,7 +9,6 @@ const Dashboard = ({ params }) => {
     const dispatch = useDispatch();
     const [isLoaded, setIsLoaded] = useState(false);
     const [navbarShowing, setNavbarShowing] = useState(true);
-    console.log(navbarShowing)
 
     useEffect(() => {
         dispatch(fetchAllMyProjects()).then(() => setIsLoaded(true));

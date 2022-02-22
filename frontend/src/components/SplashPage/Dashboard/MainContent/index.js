@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import './MainContent.css';
 import ProjectPage from './ProjectPage';
+import KanbanPage from './KanbanPage';
 
 const MainContent = ({ params }) => {
     const myProjects = useSelector((state) => state.myProjects);
@@ -24,8 +24,11 @@ const MainContent = ({ params }) => {
 
     return (
         <div className='dashboard-main'>
-            {params.username && params.projectName &&
+            {params.username && params.projectName && !params.kanbanId &&
                 <ProjectPage params={params} isMyProject={isMyProject} projectId={projectId}/>
+            }
+            {params.username && params.projectName && params.kanbanId &&
+                <KanbanPage params={params}/>
             }
         </div>
     )

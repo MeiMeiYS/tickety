@@ -44,6 +44,9 @@ function App() {
           <Route exact path='/:username/:projectName'>
             <SplashPage />
           </Route>
+          <Route exact path='/:username/:projectName/:kanbanId'>
+            <SplashPage />
+          </Route>
         </Switch>
       )}
     </>

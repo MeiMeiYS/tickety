@@ -75,7 +75,7 @@ const EachKanbanCard = ({ kanban, params }) => {
                 <div className='left'>
                 {showConfirmDelete &&
                     <div className='confirm-delete'>
-                        <p>Are you sure you want to permanently delete this kanban?</p>
+                        <p id='confirm-delete-text'>Are you sure you want to permanently delete this kanban?</p>
                         <button type='button' onClick={hideDeleteButton}>Maybe later</button>
                         <button className='delete' type='button' onClick={handleDelete}>Confirm delete</button>
                     </div>

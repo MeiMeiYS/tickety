@@ -38,12 +38,14 @@ router.get('/mine', requireAuth, asyncHandler(async (req, res) => {
         where: {
             owner_id: user.id,
             archive: false
-        }, include: Kanban
+        },
+        include: Kanban,
+        order: [[Kanban, 'updatedAt', 'DESC']],
     });
-
     const data = {};
     projects.forEach(project => {
         data[project.id] = project
+        // console.log(project.Kanbans)
     });
 
     return res.json(data);
@@ -57,7 +59,9 @@ router.get('^/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
         where: {
             owner_id: user.id,
             archive: false
-        }, include: Kanban
+        },
+        include: Kanban,
+        order: [[Kanban, 'updatedAt', 'DESC']],
     });
 
     return res.json(project);

@@ -3,6 +3,7 @@ const sessionRouter = require("./session.js");
 const usersRouter = require("./users.js");
 const projectsRouter = require("./projects.js");
 const kanbansRouter = require("./kanbans.js");
+const columnsRouter = require("./columns.js")
 
 // // GET /api/set-token-cookie
 // const asyncHandler = require('express-async-handler');
@@ -49,5 +50,7 @@ router.use("/users", usersRouter);
 router.use("/projects", projectsRouter);
 
 router.use("/kanbans", kanbansRouter);
+
+router.use("/columns", columnsRouter);
 
 module.exports = router;

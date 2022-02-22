@@ -82,7 +82,7 @@ const ProejctInfo = ({ params, isMyProject, projectId, currentProject }) => {
             <div className='main-content-card project-info'>
                 {showConfirmDelete &&
                     <div className='confirm-delete'>
-                        <p>Are you sure you want to permanently delete this project?</p>
+                        <p id='confirm-delete-text'>Are you sure you want to permanently delete this project?</p>
                         <button type='button' onClick={hideDeleteButton}>Maybe later</button>
                         <button className='delete' type='button' onClick={handleDelete}>Confirm delete</button>
                     </div>
