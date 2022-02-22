@@ -30,6 +30,9 @@ const KanbanPage = ({ params }) => {
                                     {column.Tasks.map(task => {
                                         return (
                                             <div key={`task-${task.id}`} className="task-card">
+                                                <p>{`task_index ${task.task_index}`}</p>
+                                                <p>{`task_id ${task.id}`}</p>
+                                                <p>{`column_id ${task.column_id}`}</p>
                                                 {task.content}
                                             </div>
                                         )

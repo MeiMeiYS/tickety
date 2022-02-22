@@ -47,7 +47,7 @@ const AddTask = ({ column }) => {
                         type="text"
                         value={content}
                         onChange={(e) => setContent(e.target.value)}
-                        // required
+                        required
                         />
                     </div>
                     <button className='submit' type="submit">Add</button>
