@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import ThreeDotsButton from "../ThreeDotsButton";
 import { editColumn, deleteColumn, fetchOneKanbanById } from "../../../../../store/kanbans";
 

@@ -28,6 +28,9 @@ const kanbanValidators = [
     check('description')
         .isLength({ max: 2200 })
         .withMessage('Description cannot be over 2200 characters.'),
+    check('project_id')
+        .exists({ checkFalsy: true })
+        .withMessage('Invalid request, missing required data.'),
     handleValidationErrors
 ];
 
@@ -41,7 +44,7 @@ router.get('^/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
             model: Column,
             include: Task
         },
-        order: [[Column, 'column_index', 'ASC']]
+        order: [[Column, 'column_index', 'ASC'], [Column, Task, 'task_index','ASC']]
     });
 
     return res.json(kanban);
@@ -76,7 +79,7 @@ router.post('/', requireAuth, kanbanValidators, asyncHandler(async (req, res) =>
             model: Column,
             include: Task
         },
-        order: [[Column, 'column_index', 'ASC']]
+        order: [[Column, 'column_index', 'ASC'], [Column, Task, 'task_index','ASC']]
     });
 
     return res.json(kanban);

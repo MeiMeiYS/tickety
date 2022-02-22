@@ -28,6 +28,8 @@ const EachKanbanCard = ({ kanban, params }) => {
     const closeEditForm = e => {
         e.preventDefault();
         setViewOnlyMode(true);
+        setName(kanban.name);
+        setDescription(kanban.description);
     }
 
     const showDeleteButton = e => {

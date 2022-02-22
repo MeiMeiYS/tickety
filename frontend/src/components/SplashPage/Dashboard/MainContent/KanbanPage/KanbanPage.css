@@ -187,4 +187,82 @@
     background-color: var(--text-primary);
 }
 
+/*-----------add tasks----------------------------------------------------------------*/
+
+.dashboard-main .kanban-page .add-task {
+    background-color: transparent;
+    width: 100%;
+    min-height: 40px;
+    border: 1px solid var(--text-grey);
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.dashboard-main .kanban-page .add-task .title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* background-color: thistle; */
+    height: 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.dashboard-main .kanban-page .add-task .title:hover p {
+    text-decoration: underline black;
+}
+
+.dashboard-main .kanban-page .add-task .title i {
+    margin-right: 10px;
+}
+
+.dashboard-main .kanban-page .add-task form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 150px;
+    border-top: 1px solid var(--border-input-box);
+    margin-top: 10px;
+}
+
+.dashboard-main .kanban-page .add-task form textarea {
+    min-height: 120px;
+    width: 100%;
+    border-radius: 10px;
+    padding: 10px;
+    transition: all 0.3s;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    resize: vertical;
+    margin-top: 10px;
+}
+
+.dashboard-main .kanban-page .add-task form button {
+    width: 60px;
+    height: 30px;
+    color: var(--text-primary);
+    border: 2px solid var(--text-primary);
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-right: 10px;
+    margin-left: auto;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
 /*-----------tasks container----------------------------------------------------------------*/
+
+.dashboard-main .kanban-page .tasks-container .task-card {
+    background-color: rgb(205, 217, 227);
+    width: 100%;
+    min-height: 100px;
+    border: 1px solid var(--text-grey);
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 20px;
+}

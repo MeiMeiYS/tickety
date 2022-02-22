@@ -24,7 +24,11 @@ const columnValidators = [
                         return Promise.reject('This column name already been used within this kanban.')
                     }
                 })
-        })
+        }),
+    check('kanban_id')
+        .exists({ checkFalsy: true })
+        .withMessage('Invalid request, missing required data.'),
+    handleValidationErrors
 ];
 
 // create a column
