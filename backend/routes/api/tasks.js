@@ -46,6 +46,22 @@ router.put('^/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
     const { user } = req;
     const { newColumnId, newIndex } = req.body;
     const task_id = parseInt(req.params.id, 10);
+    const task = await Task.findByPk(task_id);
+    const oldColumnId = task.column_id;
+    const oldIndex = task.task_index;
+
+    // if task is only moving within the same column
+    if (parseInt(newColumnId, 10) === oldColumnId) {
+        console.log('!!!!!!!!!!!', newColumnId, oldColumnId)
+        const tasks = await Task.findAll({ where: {column_id: oldColumnId}, order: [['task_index', 'ASC']] })
+        arrayOfId = tasks.map(task => {
+            return task.id;
+        })
+        arrayOfId.splice(oldIndex, 1);
+        arrayOfId.splice(newIndex, 0, task_id);
+        await resetIndex(arrayOfId, 0);
+        return res.json('success');
+    }
 
     // update new column's task from newIndex to end
     const newColumnsTasks = await Task.findAll({ where: {column_id: newColumnId}, order: [['task_index', 'ASC']] })
@@ -65,9 +81,6 @@ router.put('^/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
     await resetIndex(resetArrayNew, newIndex + 1);
 
     // update task to new column / new index
-    const task = await Task.findByPk(task_id);
-    const oldColumnId = task.column_id;
-    const oldIndex = task.task_index;
     await task.update({ column_id: newColumnId, task_index: newIndex });
 
     // update old column's task => reset all index
