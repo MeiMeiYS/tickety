@@ -41,6 +41,48 @@ router.post('/', requireAuth, taskValidators, asyncHandler(async (req, res) => {
     return res.json('success');
 }))
 
+// move a task (update column_id or task_index)
+router.put('^/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
+    const { user } = req;
+    const { newColumnId, newIndex } = req.body;
+    const task_id = parseInt(req.params.id, 10);
+
+    // update new column's task from newIndex to end
+    const newColumnsTasks = await Task.findAll({ where: {column_id: newColumnId}, order: [['task_index', 'ASC']] })
+
+    arrayOfIdNew = newColumnsTasks.map(task => {
+        return task.id;
+    })
+    resetArrayNew = arrayOfIdNew.slice(newIndex);
+
+    async function resetIndex (array, i) {
+        if (!array.length) return;
+        const task = await Task.findByPk(array[0]);
+        await task.update({ task_index: i });
+        const newArray = array.slice(1)
+        return resetIndex(newArray, i+1);
+    }
+    await resetIndex(resetArrayNew, newIndex + 1);
+
+    // update task to new column / new index
+    const task = await Task.findByPk(task_id);
+    const oldColumnId = task.column_id;
+    const oldIndex = task.task_index;
+    await task.update({ column_id: newColumnId, task_index: newIndex });
+
+    // update old column's task => reset all index
+    const oldColumnsTasks = await Task.findAll({ where: {column_id: oldColumnId}, order: [['task_index', 'ASC']] })
+
+    arrayOfIdOld = oldColumnsTasks.map(task => {
+        return task.id;
+    })
+    resetArrayOld = arrayOfIdOld.slice(oldIndex);
+
+    await resetIndex(resetArrayOld, oldIndex);
+
+    return res.json('success');
+}));
+
 // // edit a task
 // router.put('^/:id(\\d+)', requireAuth, columnValidators, asyncHandler(async (req, res) => {
 //     const { user } = req;

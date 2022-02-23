@@ -119,6 +119,19 @@ export const createTask = (column_id, content) => async (dispatch) => {
     return response;
 };
 
+
+export const moveTask = (task_id, newColumnId, newIndex) => async (dispatch) => {
+  const response = await csrfFetch(`/api/tasks/${task_id}`, {
+    method: "PUT",
+    body: JSON.stringify({
+      newColumnId,
+      newIndex
+    }),
+  });
+
+    return response;
+};
+
 //---------reducer------------------------------------------------
 
 const initialState = {};

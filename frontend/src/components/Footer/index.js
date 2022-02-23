@@ -34,7 +34,7 @@ const Footer = () => {
                 <button
                     type='button'
                     onClick={goToMyWeb}>
-                    <i className="fab fa-medium-m"></i>
+                    <i className="fa-solid fa-m"></i>
                 </button>
             </div>
             <p>© 2022 | Designed & coded by Mei Shih | React Express PostgreSQL</p>
