@@ -9,7 +9,6 @@ const TaskContainer = ({ column }) => {
   useEffect(() => {
     if (column) setTasks(column.Tasks);
   }, [column]);
-  // console.log('@@@@@@@@@@', tasks)
 
   return (
     <div className="tasks-container">

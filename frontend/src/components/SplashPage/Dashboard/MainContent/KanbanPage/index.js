@@ -24,10 +24,7 @@ const KanbanPage = ({ params }) => {
   useEffect(() => {
     if (kanban) setColumns(kanban.Columns);
 }, [kanban]);
-// console.log('@@@@@@@@@@', columns)
   const onDragEnd = result => {
-    console.log(result);
-    console.log(columns);
     if (!result.destination) return;
     const fromColumnId = result.source.droppableId;
     const fromTaskIndex = result.source.index;
@@ -40,13 +37,11 @@ const KanbanPage = ({ params }) => {
         if (column.id === parseInt(fromColumnId, 10)) fromColumnIndex = i;
         if (column.id === parseInt(toColumnId, 10)) toColumnIndex = i;
     })
-    console.log(fromColumnIndex === toColumnIndex && fromTaskIndex === toTaskIndex)
+
     if (fromColumnIndex === toColumnIndex && fromTaskIndex === toTaskIndex)  return;
 
-    console.log('@@@@@@', fromColumnId, toColumnId)
     const targetTask = columns[fromColumnIndex].Tasks[fromTaskIndex];
     const newColumns = columns.slice();
-    console.log(newColumns)
     newColumns[fromColumnIndex].Tasks.splice(fromTaskIndex, 1);
     newColumns[toColumnIndex].Tasks.splice(toTaskIndex, 0, targetTask);
     setColumns(newColumns);

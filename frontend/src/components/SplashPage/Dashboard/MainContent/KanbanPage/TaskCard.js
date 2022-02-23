@@ -79,9 +79,6 @@ const TaskCard = ({ task }) => {
             </div>
           </div>
         )}
-        <p>{`task_index ${task.task_index}`}</p>
-        <p>{`task_id ${task.id}`}</p>
-        <p>{`column_id ${task.column_id}`}</p>
         {viewOnlyMode ? (
           <p>{task.content}</p>
         ) : (

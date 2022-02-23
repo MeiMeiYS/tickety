@@ -45,7 +45,6 @@ router.get('/mine', requireAuth, asyncHandler(async (req, res) => {
     const data = {};
     projects.forEach(project => {
         data[project.id] = project
-        // console.log(project.Kanbans)
     });
 
     return res.json(data);
