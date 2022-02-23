@@ -58,18 +58,39 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    overflow-wrap: break-word;
+}
+
+.dashboard-main .kanban-page .column-title h3 {
+    display: block;
+    width: 95%;
+    white-space: pre-line;
+    font-size: 1.1rem;
+    line-height: 22px;
+    font-weight: 500;
 }
 
 /*-----------column edit form----------------------------------------------------------------*/
 
 .dashboard-main .kanban-page .column-title form {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
     width: 100%;
     height: 100%;
     background-color: rgba(245, 245, 245, 0.4);
+}
+
+.dashboard-main .kanban-page .column-title form > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.dashboard-main .kanban-page .column-title form ul {
+    margin-top: 10px;
+    margin-left: 10px;
 }
 
 .dashboard-main .kanban-page .new-column form {
@@ -228,7 +249,8 @@
     margin-top: 10px;
 }
 
-.dashboard-main .kanban-page .add-task form textarea {
+.dashboard-main .kanban-page .add-task form textarea,
+.dashboard-main .kanban-page .tasks-container textarea {
     min-height: 120px;
     width: 100%;
     border-radius: 10px;
@@ -242,7 +264,8 @@
     margin-top: 10px;
 }
 
-.dashboard-main .kanban-page .add-task form button {
+.dashboard-main .kanban-page .add-task form button,
+.dashboard-main .kanban-page .tasks-container button {
     width: 60px;
     height: 30px;
     color: var(--text-primary);
@@ -256,18 +279,101 @@
     transition: 0.3s;
 }
 
+.dashboard-main .kanban-page .add-task form button:hover,
+.dashboard-main .kanban-page .tasks-container button:hover {
+    background-color: var(--text-primary-opacity);
+}
+
+.dashboard-main .kanban-page .add-task form button:active,
+.dashboard-main .kanban-page .tasks-container button:active {
+    background-color: var(--text-primary-opacity);
+    transform: translateY(2px);
+}
+
 /*-----------tasks container----------------------------------------------------------------*/
 
 .dashboard-main .kanban-page .tasks-container .task-card {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
     background-color: #f6f5ee;
-    /* background-color: #dee9ef; */
     width: 100%;
     min-height: 100px;
     border: 1px solid var(--text-grey);
     border-radius: 10px;
     padding: 10px;
     margin-top: 20px;
-    white-space: pre-line;
+}
+
+.dashboard-main .kanban-page .tasks-container .task-card > div.content-container {
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+}
+
+.dashboard-main .kanban-page .tasks-container .task-card div p {
+    display: inline-block;
+    width: 95%;
+    padding: 10px;
     overflow-wrap: break-word;
+    white-space: pre-line;
+    font-size: 1rem;
     line-height: 22px;
+    font-weight: 400;
+}
+
+/*-----------tasks container confirm delete----------------------------------------------------------------*/
+
+.dashboard-main .kanban-page .tasks-container .confirm-delete {
+    margin-left: 15px;
+    padding: 10px;
+}
+
+.dashboard-main .kanban-page .tasks-container .confirm-delete p#confirm-delete-text {
+    margin: 0;
+    padding: 0;
+}
+
+.dashboard-main .kanban-page .tasks-container .confirm-delete .btn-group {
+    margin: 0;
+}
+
+.dashboard-main .kanban-page .tasks-container .confirm-delete .btn-group button {
+    width: 130px;
+    margin: 10px 10px 0 10px;
+}
+
+.dashboard-main .kanban-page .tasks-container form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 150px;
+    margin-top: 10px;
+}
+
+.dashboard-main .kanban-page .tasks-container .btn-group {
+    display: flex;
+    flex-direction: row;
+    margin-left: auto;
+    margin-top: 10px;
+}
+
+.dashboard-main .kanban-page .tasks-container .btn-group button {
+    margin-left: 10px;
+    margin-right: 0;
+}
+
+.dashboard-main .kanban-page .tasks-container .btn-group button.cancel {
+    color: var(--text-grey);
+    border: 2px solid var(--text-grey);
+}
+
+.dashboard-main .kanban-page .tasks-container .btn-group button.cancel:hover {
+    background-color: rgba(201, 201, 201, 0.5);
+}
+
+.dashboard-main .kanban-page .tasks-container .btn-group button.cancel:active {
+    background-color: rgba(201, 201, 201, 0.5);
+    transform: translateY(2px);
 }

@@ -15,8 +15,6 @@ const columnValidators = [
         .withMessage('Column name must be at least 3 characters long.')
         .isLength({ max: 100 })
         .withMessage('Column name is too long.')
-        .matches(/^[a-z0-9\-_]+$/i)
-        .withMessage("Column names must be alphanumeric and can only contain '_' and '-'")
         .custom((value, { req }) => {
             return Column.findOne({ where: { kanban_id: req.body.kanban_id, name: value } })
                 .then(column => {
@@ -54,7 +52,7 @@ router.put('^/:id(\\d+)', requireAuth, columnValidators, asyncHandler(async (req
     // check if column exist
     if (!column) return res.status(400).json({ errors: ['Column does not exist. Please refresh the page.'] });
     // check if user is authorized member/owner
-    // if (user.id !== project.owner_id)res.status(401).json({ errors: ['Unauthorized.'] });
+    // if (user.id !== project.owner_id) return res.status(401).json({ errors: ['Unauthorized.'] });
 
     // update column details
     await column.update({ name });
@@ -68,9 +66,9 @@ router.delete('^/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
     const kanban_id = column.kanban_id;
 
      // check if kanban exist
-     if (!column) return res.status(400).json({ errors: ['Kanban does not exist. Please refresh the page.'] });
+     if (!column) return res.status(400).json({ errors: ['Column does not exist. Please refresh the page.'] });
      // check if user is authorized member/owner
-     // if (user.id !== project.owner_id)res.status(401).json({ errors: ['Unauthorized.'] });
+     // if (user.id !== project.owner_id) return res.status(401).json({ errors: ['Unauthorized.'] });
 
     // delete all tasks and then delete column
     await Task.destroy({ where: {column_id} });

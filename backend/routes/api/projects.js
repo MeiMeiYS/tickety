@@ -91,7 +91,7 @@ router.put('^/:id(\\d+)', requireAuth, projectValidators, asyncHandler(async (re
     // check if project exist
     if (!project) return res.status(400).json({ errors: ['Project does not exist. Please refresh the page.'] });
     // check if user owns the project
-    if (user.id !== project.owner_id)res.status(401).json({ errors: ['Unauthorized.'] });
+    if (user.id !== project.owner_id) return res.status(401).json({ errors: ['Unauthorized.'] });
 
     // update project details
     await project.update({ name, description });
@@ -107,7 +107,7 @@ router.delete('^/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
     // check if project exist
     if (!project) return res.status(400).json({ errors: ['Project does not exist. Please refresh the page.'] });
     // check if user owns the project
-    if (user.id !== project.owner_id)res.status(401).json({ errors: ['Unauthorized.'] });
+    if (user.id !== project.owner_id) return res.status(401).json({ errors: ['Unauthorized.'] });
 
     // delete all members and invites, tasks, columns, and kanbans first
     await Member.destroy({ where: {project_id} });

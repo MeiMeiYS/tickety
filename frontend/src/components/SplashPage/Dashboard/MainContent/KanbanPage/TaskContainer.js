@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
 import { Draggable } from "react-beautiful-dnd";
+import TaskCard from "./TaskCard";
 
 const TaskContainer = ({ column }) => {
-    const [ tasks, setTasks ] = useState([]);
+  const [tasks, setTasks] = useState([]);
 
-    useEffect(() => {
-        if (column) setTasks(column.Tasks);
-    }, [column]);
-    // console.log('@@@@@@@@@@', tasks)
+
+  useEffect(() => {
+    if (column) setTasks(column.Tasks);
+  }, [column]);
+  // console.log('@@@@@@@@@@', tasks)
 
   return (
     <div className="tasks-container">
@@ -30,10 +32,7 @@ const TaskContainer = ({ column }) => {
                     ...provided.draggableProps.style,
                   }}
                 >
-                  <p>{`task_index ${task.task_index}`}</p>
-                  <p>{`task_id ${task.id}`}</p>
-                  <p>{`column_id ${task.column_id}`}</p>
-                  {task.content}
+                  <TaskCard task={task} />
                 </div>
               );
             }}

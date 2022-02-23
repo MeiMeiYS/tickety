@@ -52,7 +52,6 @@ router.put('^/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
 
     // if task is only moving within the same column
     if (parseInt(newColumnId, 10) === oldColumnId) {
-        console.log('!!!!!!!!!!!', newColumnId, oldColumnId)
         const tasks = await Task.findAll({ where: {column_id: oldColumnId}, order: [['task_index', 'ASC']] })
         arrayOfId = tasks.map(task => {
             return task.id;
@@ -96,55 +95,53 @@ router.put('^/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
     return res.json('success');
 }));
 
-// // edit a task
-// router.put('^/:id(\\d+)', requireAuth, columnValidators, asyncHandler(async (req, res) => {
-//     const { user } = req;
-//     const { kanban_id, name } = req.body;
-//     const column_id = parseInt(req.params.id, 10);
-//     const column = await Column.findByPk(column_id);
+// edit a task content
+router.put('^/:id(\\d+)/content', requireAuth, taskValidators, asyncHandler(async (req, res) => {
+    const { user } = req;
+    const { column_id, content } = req.body;
+    const task_id = parseInt(req.params.id, 10);
+    const task = await Task.findByPk(task_id);
 
-//     // check if column exist
-//     if (!column) return res.status(400).json({ errors: ['Column does not exist. Please refresh the page.'] });
-//     // check if user is authorized member/owner
-//     // if (user.id !== project.owner_id)res.status(401).json({ errors: ['Unauthorized.'] });
+    if (task.creator_id !== user.id) return res.status(401).json({ errors: ['Unauthorized.'] });
 
-//     // update column details
-//     await column.update({ name });
-//     return res.json('success');
-// }));
+    await task.update({ content });
+    return res.json('success');
+}));
 
-// // delete one task by id
-// router.delete('^/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
-//     const column_id = parseInt(req.params.id, 10);
-//     const column = await Column.findByPk(column_id);
-//     const kanban_id = column.kanban_id;
+// delete one task by id
+router.delete('^/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
+    const { user } = req;
+    const task_id = parseInt(req.params.id, 10);
+    const task = await Task.findByPk(task_id);
+    const task_index = task.task_index;
+    const column_id = task.column_id;
 
-//      // check if kanban exist
-//      if (!column) return res.status(400).json({ errors: ['Kanban does not exist. Please refresh the page.'] });
-//      // check if user is authorized member/owner
-//      // if (user.id !== project.owner_id)res.status(401).json({ errors: ['Unauthorized.'] });
+     // check if task exist
+     if (!task) return res.status(400).json({ errors: ['Task does not exist. Please refresh the page.'] });
+     // check if user is authorized member/owner
+     if (task.creator_id !== user.id) return res.status(401).json({ errors: ['Unauthorized.'] });
 
-//     // delete all tasks and then delete column
-//     await Task.destroy({ where: {column_id} });
-//     await column.destroy();
+    // delete task
+    await task.destroy();
 
-//     // reset all column id
-//     const columns = await Column.findAll({ where: {kanban_id}, order: [['column_index', 'ASC']] })
-//       arrayOfId = columns.map(column => {
-//         return column.id;
-//     })
+    // reset all column's task index
+    const tasks = await Task.findAll({ where: {column_id}, order: [['task_index', 'ASC']] })
+    arrayOfId = tasks.map(task => {
+        return task.id;
+    })
+    resetArray = arrayOfId.slice(task_index);
 
-//     async function resetIndex (arrayOfId, i) {
-//         if (!arrayOfId.length) return;
-//         const column = await Column.findByPk(arrayOfId[0]);
-//         await column.update({ column_index: i });
-//         const newArray = arrayOfId.slice(1)
-//         return resetIndex(newArray, i+1);
-//     }
-//     await resetIndex(arrayOfId, 0);
+    async function resetIndex (array, i) {
+        if (!array.length) return;
+        const task = await Task.findByPk(array[0]);
+        await task.update({ task_index: i });
+        const newArray = array.slice(1)
+        return resetIndex(newArray, i+1);
+    }
+    await resetIndex(resetArray, task_index);
 
-//     return res.json('success');
-// }));
+    return res.json('success');
+}));
 
 
 module.exports = router;

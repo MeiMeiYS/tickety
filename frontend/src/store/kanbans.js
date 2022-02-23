@@ -119,7 +119,6 @@ export const createTask = (column_id, content) => async (dispatch) => {
     return response;
 };
 
-
 export const moveTask = (task_id, newColumnId, newIndex) => async (dispatch) => {
   const response = await csrfFetch(`/api/tasks/${task_id}`, {
     method: "PUT",
@@ -127,6 +126,26 @@ export const moveTask = (task_id, newColumnId, newIndex) => async (dispatch) => 
       newColumnId,
       newIndex
     }),
+  });
+
+    return response;
+};
+
+export const editTask = (task_id, column_id, content) => async (dispatch) => {
+  const response = await csrfFetch(`/api/tasks/${task_id}/content`, {
+    method: "PUT",
+    body: JSON.stringify({
+      column_id,
+      content
+    }),
+  });
+
+    return response;
+};
+
+export const deleteTask = (task_id) => async (dispatch) => {
+  const response = await csrfFetch(`/api/tasks/${task_id}`, {
+    method: "DELETE",
   });
 
     return response;

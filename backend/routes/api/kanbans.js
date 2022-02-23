@@ -66,7 +66,7 @@ router.post('/', requireAuth, kanbanValidators, asyncHandler(async (req, res) =>
         project_id,
         kanban_id: newKanban.id,
         column_id: column1.id,
-        content: ':sparkles: Welcome to Tickety :sparkles:',
+        content: '🎉 Welcome to Tickety 🎉 \n We\'re so excited that you\'ve decided to create a new project! You can create, edit, and delete tasks or columns here. You can also drag and drop me to any column you like.',
         task_index: 0,
         creator_id: user.id
     })
@@ -95,7 +95,7 @@ router.put('^/:id(\\d+)', requireAuth, kanbanValidators, asyncHandler(async (req
     // check if kanban exist
     if (!kanban) return res.status(400).json({ errors: ['Kanban does not exist. Please refresh the page.'] });
     // check if user is authorized member/owner
-    // if (user.id !== project.owner_id)res.status(401).json({ errors: ['Unauthorized.'] });
+    // if (user.id !== project.owner_id) return res.status(401).json({ errors: ['Unauthorized.'] });
 
     // update project details
     await kanban.update({ name, description });
@@ -111,7 +111,7 @@ router.delete('^/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
      // check if kanban exist
      if (!kanban) return res.status(400).json({ errors: ['Kanban does not exist. Please refresh the page.'] });
      // check if user is authorized member/owner
-     // if (user.id !== project.owner_id)res.status(401).json({ errors: ['Unauthorized.'] });
+     // if (user.id !== project.owner_id) return res.status(401).json({ errors: ['Unauthorized.'] });
 
     // delete all tasks, columns, and then delete kanban
     await Task.destroy({ where: {kanban_id} });
