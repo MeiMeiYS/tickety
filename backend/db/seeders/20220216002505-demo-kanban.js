@@ -5,7 +5,7 @@ module.exports = {
     return queryInterface.bulkInsert('Kanbans', [
       {
         project_id: 1,
-        name: 'Demo Kanban',
+        name: 'Demo-Kanban',
         description: 'This is a demo kanban.',
       },
     ], {});

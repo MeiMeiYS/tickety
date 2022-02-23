@@ -6,19 +6,19 @@ module.exports = {
       {
         project_id: 1,
         kanban_id: 1,
-        name: 'Demo Column1',
+        name: 'To do',
         column_index: 0,
       },
       {
         project_id: 1,
         kanban_id: 1,
-        name: 'Demo Column2',
+        name: 'In progress',
         column_index: 1,
       },
       {
         project_id: 1,
         kanban_id: 1,
-        name: 'Demo Column3',
+        name: 'Done',
         column_index: 2,
       },
     ], {});
