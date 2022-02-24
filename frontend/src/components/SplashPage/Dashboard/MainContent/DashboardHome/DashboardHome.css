@@ -73,3 +73,22 @@
 .main-content-card.about-this-app {
     margin-top: 30px;
 }
+
+.repo-link {
+    color: var(--text-primary);
+    text-decoration: underline var(--text-primary);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.repo-link:hover {
+    color: var(--background-navbar);
+    text-decoration: underline var(--background-navbar);
+}
+
+ul.future-updates li {
+    list-style: inside;
+    padding: 0 20px;
+    font-size: 1.1rem;
+    line-height: 1.8rem;
+}
