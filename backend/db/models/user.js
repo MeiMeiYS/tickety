@@ -14,6 +14,14 @@ module.exports = (sequelize, DataTypes) => {
     static getCurrentUserById(id) {
       return User.scope("currentUser").findByPk(id);
     }
+    static async changePassword({ user_id, oldPassword, password }) {
+      const user = await User.scope('loginUser').findByPk(user_id);
+      if (user && user.validatePassword(oldPassword)) {
+        const hashedPassword = bcrypt.hashSync(password);
+        await user.update({ hashedPassword });
+        return await User.scope('currentUser').findByPk(user.id);
+      }
+    }
     static async login({ credential, password }) {
       const { Op } = require('sequelize');
       const user = await User.scope('loginUser').findOne({

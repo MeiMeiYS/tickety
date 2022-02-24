@@ -53,6 +53,26 @@ export const logout = () => async (dispatch) => {
   return response;
 };
 
+export const editUserInfo = (user_id, userInfo) => async (dispatch) => {
+  const response = await csrfFetch(`/api/users/${user_id}`, {
+    method: "PUT",
+    body: JSON.stringify(userInfo),
+  });
+  const data = await response.json();
+  dispatch(setUser(data.user));
+  return response;
+};
+
+export const changeUserPassword = (user_id, userInfo) => async (dispatch) => {
+  const response = await csrfFetch(`/api/users/${user_id}/password`, {
+    method: "PUT",
+    body: JSON.stringify(userInfo),
+  });
+  const data = await response.json();
+  dispatch(setUser(data.user));
+  return response;
+};
+
 const initialState = { user: null };
 
 function reducer(state = initialState, action) {

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ProjectPage from './ProjectPage';
 import KanbanPage from './KanbanPage';
+import AccountSetting from './AccountSetting';
 
 const MainContent = ({ params }) => {
     const myProjects = useSelector((state) => state.myProjects);
@@ -20,6 +21,8 @@ const MainContent = ({ params }) => {
 
     }, [params]);
 
+    console.log(window.location.pathname === '/account-setting')
+
 
 
     return (
@@ -30,6 +33,7 @@ const MainContent = ({ params }) => {
             {params.username && params.projectName && params.kanbanId &&
                 <KanbanPage params={params}/>
             }
+            { window.location.pathname === '/account-setting' && <AccountSetting sessionUser={sessionUser}/>}
         </div>
     )
 }

@@ -64,7 +64,7 @@ const ColumnTitle = ({ column }) => {
     return (
         <>
             <div className="column-title">
-                {viewOnlyMode ? <h3>{column.name} {column.column_index} {column.id}</h3> :
+                {viewOnlyMode ? <h3>{column.name}</h3> :
                 <>
 
                     <form onSubmit={handleEditColumn} >

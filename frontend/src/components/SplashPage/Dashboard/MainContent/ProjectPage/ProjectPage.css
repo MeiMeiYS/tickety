@@ -24,6 +24,7 @@
     border-radius: 0 10px 10px 10px;
     padding: 30px 22px 22px 22px;
     border: 2px solid var(--border-input-box);
+    /* max-width: 1000px; */
 }
 
 /*-----------input display & form buttons----------------------------------------------------------------*/
