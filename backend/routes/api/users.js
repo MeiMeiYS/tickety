@@ -125,7 +125,7 @@ router.put('^/:id(\\d+)', requireAuth, validateEditUserInfo, asyncHandler(async 
 
   if (user.id !== user_id) return res.status(401).json({ errors: ['Unauthorized.'] });
 
-  // if (user_id === 1) return res.status(401).json({ errors: ['Demo user\'s info cannot be changed.'] });
+  if (user_id === 1) return res.status(401).json({ errors: ['Demo user\'s info cannot be changed.'] });
   await currentUser.update({ email, username, name, title });
 
   return res.json({ user: currentUser});

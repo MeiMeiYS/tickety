@@ -26,8 +26,10 @@ router.post('/', requireAuth, taskValidators, asyncHandler(async (req, res) => {
     const { column_id, content } = req.body;
 
     const column = await Column.findByPk(column_id);
+    const project = await Project.findByPk(column.project_id);
+    if (user.id !== project.owner_id) return res.status(401).json({ errors: ['Unauthorized.'] });
     const tasks = await Task.findAll({ where: {column_id}, order: [['task_index', 'ASC']] })
-    if (tasks.length >= 30) return res.status(400).json({ errors: ['You can have maximum 30 tasks in one column.'] });
+    // if (tasks.length >= 30) return res.status(400).json({ errors: ['You can have maximum 30 tasks in one column.'] });
 
     // create task
     const newTask = await Task.create({

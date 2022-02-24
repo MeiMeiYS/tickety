@@ -36,6 +36,9 @@ router.post('/', requireAuth, columnValidators, asyncHandler(async (req, res) =>
 
     const columns = await Column.findAll({ where: {kanban_id}, order: [['column_index', 'ASC']] })
     if (columns.length >= 5) return res.status(400).json({ errors: ['You can have maximum 5 columns in a kanban.'] });
+    // check if user is authorized member/owner
+    const project = await Project.findByPk(columns.project_id);
+    if (user.id !== project.owner_id) return res.status(401).json({ errors: ['Unauthorized.'] });
 
     // create column
     const newColumn = await Column.create({ project_id, kanban_id, name, column_index: columns.length });
@@ -52,7 +55,8 @@ router.put('^/:id(\\d+)', requireAuth, columnValidators, asyncHandler(async (req
     // check if column exist
     if (!column) return res.status(400).json({ errors: ['Column does not exist. Please refresh the page.'] });
     // check if user is authorized member/owner
-    // if (user.id !== project.owner_id) return res.status(401).json({ errors: ['Unauthorized.'] });
+    const project = await Project.findByPk(column.project_id);
+    if (user.id !== project.owner_id) return res.status(401).json({ errors: ['Unauthorized.'] });
 
     // update column details
     await column.update({ name });
@@ -68,7 +72,8 @@ router.delete('^/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
      // check if kanban exist
      if (!column) return res.status(400).json({ errors: ['Column does not exist. Please refresh the page.'] });
      // check if user is authorized member/owner
-     // if (user.id !== project.owner_id) return res.status(401).json({ errors: ['Unauthorized.'] });
+     const project = await Project.findByPk(column.project_id);
+     if (user.id !== project.owner_id) return res.status(401).json({ errors: ['Unauthorized.'] });
 
     // delete all tasks and then delete column
     await Task.destroy({ where: {column_id} });
