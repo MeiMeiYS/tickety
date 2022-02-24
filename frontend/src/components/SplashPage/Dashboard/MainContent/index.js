@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import ProjectPage from './ProjectPage';
 import KanbanPage from './KanbanPage';
 import AccountSetting from './AccountSetting';
+import DashboardHome from './DashboardHome';
 
 const MainContent = ({ params }) => {
     const myProjects = useSelector((state) => state.myProjects);
@@ -21,7 +22,7 @@ const MainContent = ({ params }) => {
 
     }, [params]);
 
-    console.log(window.location.pathname === '/account-setting')
+    console.log(window.location.pathname)
 
 
 
@@ -34,6 +35,7 @@ const MainContent = ({ params }) => {
                 <KanbanPage params={params}/>
             }
             { window.location.pathname === '/account-setting' && <AccountSetting sessionUser={sessionUser}/>}
+            { window.location.pathname === '/' && <DashboardHome />}
         </div>
     )
 }

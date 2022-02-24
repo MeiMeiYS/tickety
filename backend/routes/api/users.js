@@ -133,7 +133,6 @@ router.put('^/:id(\\d+)', requireAuth, validateEditUserInfo, asyncHandler(async 
 
 // update user password
 router.put('^/:id(\\d+)/password', requireAuth, validateChangePassword, asyncHandler(async (req, res) => {
-  console.log('@@@@@@@@@@@@@@@@@@')
   const { user } = req;
   const { oldPassword, password } = req.body;
   const user_id = parseInt(req.params.id, 10);
