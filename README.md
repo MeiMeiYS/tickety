@@ -8,6 +8,11 @@
 ## Tickety at a Glance
 Tickety is an app where you can manage your work flow by stages and keep track of your tasks. Tickety is designed & coded by Mei Shih. Tickety app is built in 10 days in 2022 February. It is Mei's capstone project at App Academy. The most challenging part of building this app for Mei is implementing the drag and drop task card on the kanban board and dynamically updating the frontend state and backend data with no animation delay.
 
+![Splash page on different screen size](/images/splash_page.png)
+**Tickety is a responsive web app.**
+![Splash tasks](/images/tasks.png)
+**User can manage tasks by stage.**
+
 ## Application Architecture
 Tickety is built on React as frontend, Express as backend, and used PostgreSQL/Sequelize to setup database.
 
