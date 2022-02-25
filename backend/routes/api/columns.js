@@ -37,7 +37,7 @@ router.post('/', requireAuth, columnValidators, asyncHandler(async (req, res) =>
     const columns = await Column.findAll({ where: {kanban_id}, order: [['column_index', 'ASC']] })
     if (columns.length >= 5) return res.status(400).json({ errors: ['You can have maximum 5 columns in a kanban.'] });
     // check if user is authorized member/owner
-    const project = await Project.findByPk(columns.project_id);
+    const project = await Project.findByPk(project_id);
     if (user.id !== project.owner_id) return res.status(401).json({ errors: ['Unauthorized.'] });
 
     // create column
@@ -65,6 +65,7 @@ router.put('^/:id(\\d+)', requireAuth, columnValidators, asyncHandler(async (req
 
 // delete one column by id
 router.delete('^/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
+    const { user } = req;
     const column_id = parseInt(req.params.id, 10);
     const column = await Column.findByPk(column_id);
     const kanban_id = column.kanban_id;

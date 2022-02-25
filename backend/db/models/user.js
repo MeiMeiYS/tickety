@@ -103,7 +103,7 @@ module.exports = (sequelize, DataTypes) => {
       title: {
         type: DataTypes.STRING(100),
         validate: {
-          len: [1, 100],
+          len: [0, 100],
         },
       },
       avatar_url: {

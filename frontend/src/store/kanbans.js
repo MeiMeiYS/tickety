@@ -23,9 +23,9 @@ export const fetchOneKanbanById = (id) => async (dispatch) => {
   if (response.ok) {
     const kanban = await response.json();
     dispatch(addkanban(kanban));
-    return;
+    return true;
   }
-  return response;
+  return;
 };
 
 export const createKanban = (project_id, name, description) => async (dispatch) => {

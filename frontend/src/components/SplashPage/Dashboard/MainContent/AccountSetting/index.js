@@ -12,7 +12,7 @@ const AccountSetting = ({ sessionUser }) => {
   const [username, setUsername] = useState(sessionUser.username);
   const [name, setName] = useState(sessionUser.name);
   const [email, setEmail] = useState(sessionUser.email);
-  const [title, setTitle] = useState(sessionUser.title);
+  const [title, setTitle] = useState(sessionUser.title || '');
   const [oldPassword, setOldPassword] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -51,6 +51,7 @@ const AccountSetting = ({ sessionUser }) => {
 
   const handleEdit = (e) => {
     e.preventDefault();
+    console.log(email, username, name, title)
     dispatch(editUserInfo(sessionUser.id, {email: email.trim(), username: username.trim(), name: name.trim(), title: title.trim()}))
     .then(() => {
         setShowAccountSubmitBtn(false);

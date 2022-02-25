@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import "./KanbanPage.css";
@@ -9,6 +10,7 @@ import AddTask from "./AddTask";
 import TaskContainer from "./TaskContainer";
 
 const KanbanPage = ({ params }) => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const { kanbanId } = params;
   const kanban = useSelector((state) => state.kanbans[kanbanId]);
@@ -18,7 +20,10 @@ const KanbanPage = ({ params }) => {
 
   // when this component is loaded, dispatch to fetch kanban by id and added to redux store
   useEffect(() => {
-    dispatch(fetchOneKanbanById(kanbanId));
+    dispatch(fetchOneKanbanById(kanbanId))
+    .catch(res => {
+      history.push('/');
+    })
   }, [kanbanId]);
 
   useEffect(() => {
@@ -61,7 +66,7 @@ const KanbanPage = ({ params }) => {
     <>
       <div className="kanban-page">
         <DragDropContext onDragEnd={(result) => onDragEnd(result)}>
-          {kanban &&
+          {columns &&
             columns.map((column) => {
               return (
                 <Droppable key={`column-${column.id}`} droppableId={`${column.id}`}>
