@@ -36,7 +36,9 @@ const kanbanValidators = [
 
 // load one kanban by id
 router.get('^/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
+    const { user } = req;
     const kanban_id = parseInt(req.params.id, 10);
+
     const kanban = await Kanban.findByPk(kanban_id, {
         where: {
             archive: false
@@ -46,6 +48,10 @@ router.get('^/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
         },
         order: [[Column, 'column_index', 'ASC'], [Column, Task, 'task_index','ASC']]
     });
+
+    // check if user is authorized member/owner
+    const project = await Project.findByPk(kanban.project_id);
+    if (user.id !== project.owner_id) return res.status(401).json({ errors: ['Unauthorized.'] });
 
     return res.json(kanban);
 }));
